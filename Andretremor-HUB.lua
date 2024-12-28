@@ -20,7 +20,7 @@ game:GetService("ReplicatedStorage").Packages.Knit.Services.CustomizationService
   end
 end)
 
-Section:CreateButton("Get WONDERLAND effect", function()
+Section:CreateButton("Dapet WONDERLAND effect", function()
 local args = {
     [1] = "GoalEffects",
     [2] = "Wonderland"
@@ -29,7 +29,7 @@ local args = {
 game:GetService("ReplicatedStorage").Packages.Knit.Services.CustomizationService.RE.Customize:FireServer(unpack(args))
 end)
 
-Section:CreateButton("Get Conquer effect", function()
+Section:CreateButton("Dapet Conquer effect", function()
 local args = {
     [1] = "GoalEffects",
     [2] = "Conquer"
@@ -38,7 +38,7 @@ local args = {
 game:GetService("ReplicatedStorage").Packages.Knit.Services.CustomizationService.RE.Customize:FireServer(unpack(args))
 end)
 
-Section:CreateButton("Get Presents effect", function()
+Section:CreateButton("Dapet Presents effect", function()
 local args = {
     [1] = "GoalEffects",
     [2] = "Presents"
@@ -47,7 +47,7 @@ local args = {
 game:GetService("ReplicatedStorage").Packages.Knit.Services.CustomizationService.RE.Customize:FireServer(unpack(args))
 end)
 
-Section:CreateButton("Get Time Stop effect", function()
+Section:CreateButton("Dapet Time Stop effect", function()
 local args = {
     [1] = "GoalEffects",
     [2] = "Time Stop"
@@ -56,7 +56,7 @@ local args = {
 game:GetService("ReplicatedStorage").Packages.Knit.Services.CustomizationService.RE.Customize:FireServer(unpack(args))
 end)
 
-Section:CreateButton("Get Ginger Bread effect", function()
+Section:CreateButton("Dapet Ginger Bread effect", function()
 local args = {
     [1] = "GoalEffects",
     [2] = "Gingerbread"
