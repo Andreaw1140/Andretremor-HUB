@@ -9,7 +9,7 @@ local Window = Library:NewWindow("Andretremor (BETA) | BLUE LOCK *OP*")
 
 local Section = Window:NewSection("GOAL EFFECTS")
 
-Section:CreateTextbox("Equip Any goaleffect", function(goal_text)
+Section:CreateTextbox("Pilih cuy GoalEffect", function(goal_text)
 if goal_text ~= "" then
    local args = {
     [1] = "GoalEffects",
