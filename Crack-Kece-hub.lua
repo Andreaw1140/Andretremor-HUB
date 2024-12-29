@@ -11,7 +11,7 @@ KeceHub.Themes["NeonVibes"] = {
 }
 -- Main Window
 local Window = KeceHub:MakeWindow({
-    Name = "True V4",
+    Name = "    Zemito Hub",
     HidePremium = false,
     SaveConfig = true,
     ConfigFolder = "KeceHubV2"
