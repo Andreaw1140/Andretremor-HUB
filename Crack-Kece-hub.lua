@@ -8,6 +8,7 @@ local Window = KeceHub:MakeWindow({
     SaveConfig = true,
     ConfigFolder = "KeceHubV2"
 })
+
 -- Sistem Key
 local Authenticated = false
 local RequiredKey = "BanuIsReal"
@@ -25,7 +26,7 @@ end
 -- Jika Key sudah tersimpan dan valid, otomatis autentikasi
 if KeyStorage and KeyStorage.Value == RequiredKey then
     Authenticated = true
-    LawwLib:MakeNotification({
+    KeceHub:MakeNotification({
         Name = "Welcome Back",
         Content = "Key valid! Welcome to LawwScriptHUB!",
         Time = 5,
@@ -33,7 +34,7 @@ if KeyStorage and KeyStorage.Value == RequiredKey then
     })
 else
     -- Key Validation Tab
-    local KeyTab = LawwScriptHUB:MakeTab({
+    local KeyTab = KeceHub:MakeTab({
         Name = "KEY AUTH",
         Icon = "rbxassetid://4483345998",
         PremiumOnly = false
@@ -48,7 +49,7 @@ else
                 Authenticated = true
                 SaveKeyToWorkspace(value) -- Simpan key ke Workspace
 
-                LawwLib:MakeNotification({
+                KeceHub:MakeNotification({
                     Name = "Success",
                     Content = "Key accepted! Welcome to LawwScriptHUB!",
                     Time = 5,
@@ -56,9 +57,9 @@ else
                 })
 
                 -- Hapus KeyTab setelah key benar
-                LawwLib:DestroyTab(KeyTab)
+                KeceHub:DestroyTab(KeyTab)
             else
-                LawwLib:MakeNotification({
+                KeceHub:MakeNotification({
                     Name = "Invalid Key",
                     Content = "Incorrect key, please try again.",
                     Time = 5,
@@ -73,7 +74,6 @@ else
         task.wait(1)
     end
 end
-})
 
 -- Welcome Notification
 local function ShowWelcomeNotification()
@@ -82,7 +82,7 @@ local function ShowWelcomeNotification()
     local userId = player.UserId
     local avatarUrl = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. tostring(userId) .. "&width=420&height=420&format=png"
 
-    LawwLib:MakeNotification({
+    KeceHub:MakeNotification({
         Name = "Welcome " .. displayName,
         Content = "Enjoy using LawwScriptHUB!",
         Image = avatarUrl,
@@ -91,6 +91,7 @@ local function ShowWelcomeNotification()
 end
 ShowWelcomeNotification()
 task.wait(2)
+
 -- Variables
 local bypassStatus = false
 local startTime = os.clock()
@@ -106,13 +107,6 @@ local StatusTab = Window:MakeTab({
 StatusTab:AddLabel("STATUS SC: VIP(Got Crack)")
 StatusTab:AddLabel("DEV: tiktok @lawwstore,Andretremor")
 StatusTab:AddLabel("INFO: Penjual SC ini hanya @lawwstore, Dan SC nya Gwh kasih free")
-
--- Update Ping and Bypass Status
-task.spawn(function()
-    while true do
-        task.wait(1) -- Interval pembaruan setiap 1 detik
-    end
-end)
 
 -- Tab: Main
 local MainTab = Window:MakeTab({
@@ -267,20 +261,4 @@ ServerTab:AddTextbox({
         -- Hapus karakter backtick dan simpan Job ID
         jobID = value:gsub("`", "")
         if jobID ~= "" then
-            game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer("teleport", jobID)
-        end
-    end
-})
-
--- Initialize UI
-KeceHub:Init()
-
--- Override Welcome Message
-local notificationFrame = game:GetService("CoreGui"):FindFirstChild("Kece Hub"):FindFirstChild("Notifications")
-if notificationFrame then
-    for _, child in pairs(notificationFrame:GetChildren()) do
-        if child.Name == "Welcome" then
-            child.Message.Text = "KECE HUB V5"
-        end
-    end
-end
+            game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer
