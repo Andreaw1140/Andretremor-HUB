@@ -1,6 +1,13 @@
 -- Memuat ZemitoHub Library
 local ZemitoHub = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source", true))()
 
+-- Pengecekan apakah ZemitoHub berhasil dimuat
+if not ZemitoHub then
+    warn("Gagal memuat ZemitoHub!")
+else
+    print("ZemitoHub berhasil dimuat!")
+end
+
 -- Mengubah warna tema Frost setelah memuat ZemitoHub
 ZemitoHub.Themes.Frost.Main = Color3.fromRGB(173, 216, 230)  -- Biru muda
 ZemitoHub.Themes.Frost.Second = Color3.fromRGB(135, 206, 250)  -- Biru langit terang
@@ -11,6 +18,7 @@ ZemitoHub.Themes.Frost.TextDark = Color3.fromRGB(0, 0, 50)  -- Teks gelap biru g
 
 -- Terapkan tema yang sudah diubah
 ZemitoHub:ApplyTheme(ZemitoHub.Themes.Frost)
+print("Tema Frost diterapkan.")
 
 -- Membuat Window dengan tema Frost
 local Window = ZemitoHub:MakeWindow({
@@ -20,6 +28,13 @@ local Window = ZemitoHub:MakeWindow({
     ConfigFolder = "ZemitoHubV2",
     Theme = "Frost"  -- Terapkan tema Frost yang telah diubah
 })
+
+-- Pengecekan apakah Window berhasil dibuat
+if Window then
+    print("Window berhasil dibuat.")
+else
+    warn("Gagal membuat Window!")
+end
 
 -- Variables
 local bypassStatus = false
@@ -194,5 +209,6 @@ ServerTab:AddTextbox({
     end
 })
 
--- Initialize UI
+-- Inisialisasi UI
 ZemitoHub:Init()
+print("ZemitoHub UI telah diinisialisasi.")
