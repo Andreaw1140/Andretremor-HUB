@@ -1,204 +1,121 @@
--- Rename Orion Lib to LawwLib
-local LawwLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
+-- Load KeceHub Library
+local KeceHub = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
 
--- LawwScriptHUB UI Configuration
-local LawwScriptHUB = LawwLib:MakeWindow({
-    Name = "LawwScriptHUb",
+-- Main Window
+local Window = KeceHub:MakeWindow({
+    Name = "True V4",
     HidePremium = false,
-    IntroText = "LawwScriptHUB Loading...",
-    SaveConfig = false,
-    ConfigFolder = "LawwScriptHUB"
+    SaveConfig = true,
+    ConfigFolder = "KeceHubV2"
 })
 
--- Sistem Key
+-- Variables
+local bypassStatus = false
+local startTime = os.clock()
 local Authenticated = false
-local RequiredKey = "BanuIsReal"
-local KeyStorage = game:GetService("Workspace"):FindFirstChild("LawwScriptKey") -- Autosave Key di Workspace
+local RequiredKey = "BanuIsReal"  -- Ganti dengan key yang valid
+local userKey = ""  -- Key yang diinput user
 
--- Fungsi untuk menyimpan key ke Workspace
+-- Link untuk mendapatkan Key
+local keyURL = "https://link-center.net/1272037/key-for-script-andrehub"
+
+-- Fungsi untuk mengambil key dari link
+local function GetKeyFromLink()
+    return game:HttpGet(keyURL)
+end
+
+-- Key Authentication
 local function SaveKeyToWorkspace(key)
-    if not game:GetService("Workspace"):FindFirstChild("LawwScriptKey") then
+    local keyStorage = game:GetService("Workspace"):FindFirstChild("KeceHubKey")
+    if not keyStorage then
         local KeyObject = Instance.new("StringValue", game:GetService("Workspace"))
-        KeyObject.Name = "LawwScriptKey"
+        KeyObject.Name = "KeceHubKey"
         KeyObject.Value = key
     end
 end
 
--- Jika Key sudah tersimpan dan valid, otomatis autentikasi
-if KeyStorage and KeyStorage.Value == RequiredKey then
-    Authenticated = true
-    LawwLib:MakeNotification({
-        Name = "Welcome Back",
-        Content = "Key valid! Welcome to LawwScriptHUB!",
-        Time = 5,
-        Image = "rbxassetid://4483345998"
-    })
-else
-    -- Key Validation Tab
-    local KeyTab = LawwScriptHUB:MakeTab({
-        Name = "KEY AUTH",
-        Icon = "rbxassetid://4483345998",
-        PremiumOnly = false
-    })
-
-    KeyTab:AddTextbox({
-        Name = "Enter Key",
-        Default = "",
-        TextDisappear = true,
-        Callback = function(value)
-            if value == RequiredKey then
-                Authenticated = true
-                SaveKeyToWorkspace(value) -- Simpan key ke Workspace
-
-                LawwLib:MakeNotification({
-                    Name = "Success",
-                    Content = "Key accepted! Welcome to LawwScriptHUB!",
-                    Time = 5,
-                    Image = "rbxassetid://4483345998"
-                })
-
-                -- Hapus KeyTab setelah key benar
-                LawwLib:DestroyTab(KeyTab)
-            else
-                LawwLib:MakeNotification({
-                    Name = "Invalid Key",
-                    Content = "Incorrect key, please try again.",
-                    Time = 5,
-                    Image = "rbxassetid://4483345998"
-                })
-            end
-        end
-    })
-
-    -- Tunggu hingga key benar sebelum melanjutkan
-    while not Authenticated do
-        task.wait(1)
-    end
-end
-
--- Welcome Notification
-local function ShowWelcomeNotification()
-    local player = game.Players.LocalPlayer
-    local displayName = player.DisplayName
-    local userId = player.UserId
-    local avatarUrl = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. tostring(userId) .. "&width=420&height=420&format=png"
-
-    LawwLib:MakeNotification({
-        Name = "Welcome " .. displayName,
-        Content = "Enjoy using LawwScriptHUB!",
-        Image = avatarUrl,
-        Time = 2
-    })
-end
-ShowWelcomeNotification()
-task.wait(2)
-
--- JOIN JOB Tab
-local JoinJobTab = LawwScriptHUB:MakeTab({
-    Name = "JOIN JOB",
+-- Tab: Key Authentication
+local KeyTab = Window:MakeTab({
+    Name = "KEY AUTH",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-local AutoJoin = false
-local JobID = ""
 
-JoinJobTab:AddTextbox({
-    Name = "Enter Job ID",
+KeyTab:AddTextbox({
+    Name = "Enter Key",
     Default = "",
     TextDisappear = true,
     Callback = function(value)
-        JobID = value:gsub("`", "")
-    end
-})
+        userKey = value
+        if userKey == GetKeyFromLink() then
+            Authenticated = true
+            SaveKeyToWorkspace(userKey)  -- Simpan key ke Workspace
 
-JoinJobTab:AddButton({
-    Name = "Join Job ID",
-    Callback = function()
-        if JobID ~= "" then
-            game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer("teleport", JobID)
+            KeceHub:MakeNotification({
+                Name = "Success",
+                Content = "Key accepted! Welcome to KeceHub!",
+                Time = 5,
+                Image = "rbxassetid://4483345998"
+            })
+
+            -- Hapus KeyTab setelah key benar
+            Window:DestroyTab(KeyTab)
+        else
+            KeceHub:MakeNotification({
+                Name = "Invalid Key",
+                Content = "Incorrect key, please try again.",
+                Time = 5,
+                Image = "rbxassetid://4483345998"
+            })
         end
     end
 })
 
-JoinJobTab:AddToggle({
-    Name = "Auto Join Job ID",
+-- Tunggu hingga key benar sebelum melanjutkan
+while not Authenticated do
+    task.wait(1)
+end
+
+-- Tab: Status
+local StatusTab = Window:MakeTab({
+    Name = "Status",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+StatusTab:AddLabel("STATUS SC: VIP")
+StatusTab:AddLabel("DEV: tiktok @lawwstore")
+StatusTab:AddLabel("INFO: Penjual SC ini hanya @lawwstore")
+
+-- Tab: Main
+local MainTab = Window:MakeTab({
+    Name = "Main",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- Toggles
+MainTab:AddToggle({
+    Name = "Bypass ON/OFF",
     Default = false,
     Callback = function(value)
-        AutoJoin = value
+        bypassStatus = value
+        KeceHub:MakeNotification({
+            Name = "Info",
+            Content = "Bypass " .. (value and "Enabled" or "Disabled"),
+            Image = "rbxassetid://4483345998",
+            Time = 5
+        })
     end
 })
 
-JoinJobTab:AddButton({
-    Name = "Join Less Player",
-    Callback = function()
-        local HttpService = game:GetService("HttpService")
-        local Servers = HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"))
+-- Initialize UI
+KeceHub:Init()
 
-        for _, server in ipairs(Servers.data) do
-            if server.playing < server.maxPlayers then
-                game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, server.id)
-                break
-            end
-        end
-    end
-})
-
-task.spawn(function()
-    while true do
-        if AutoJoin and JobID ~= "" then
-            game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer("teleport", JobID)
-        end
-        task.wait(1)
-    end
-end)
-
--- SCRIPT HUB Tab
-local ScriptHubTab = LawwScriptHUB:MakeTab({
-    Name = "SCRIPT HUB",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
-})
-
-ScriptHubTab:AddButton({
-    Name = "COKKA HUB NO KEY",
-    Callback = function()
-        _G.Key = "Xzt7M9IAfF"
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/UserDevEthical/Loadstring/main/CokkaHub.lua"))()
-    end
-})
-
-ScriptHubTab:AddButton({
-    Name = "RedzHub V2 (Smooth)",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/realredz/BloxFruits/refs/heads/main/Source.lua"))()
-    end
-})
-
-ScriptHubTab:AddButton({
-    Name = "ANDEPZAI OP (TRIAL)",
-    Callback = function()
-        repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/AnDepZaiHub/AnDepZaiHubBeta/refs/heads/main/AnDepZaiHubNewUpdated.lua"))()
-    end
-})
-
-ScriptHubTab:AddButton({
-    Name = "AUTO CHEST (OP)",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/VGB-VGB-VGB/-VGB-Chest-Farm--/refs/heads/main/ChestFarmByVGBTeam"))()
-    end
-})
-
--- MISC Tab
-local MiscTab = LawwScriptHUB:MakeTab({
-    Name = "MISC",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
-})
-
-MiscTab:AddButton({
-    Name = "Boost FPS",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FPS-BOOSTER/main/FPSBooster.txt"))()
-    end
+-- Show a welcome notification after authentication
+KeceHub:MakeNotification({
+    Name = "Welcome!",
+    Content = "Enjoy using KeceHub!",
+    Time = 5,
+    Image = "rbxassetid://4483345998"
 })
