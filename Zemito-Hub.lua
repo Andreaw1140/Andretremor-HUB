@@ -164,21 +164,19 @@ local GantengTab = Window:MakeTab({
 })
 
 MainTab:AddButton({
-    Name = "GantengHUB (OLD/SEPUH)",
+    Name = "GantengHUB (REMAKE V1)",
+    Callback = function()
+        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/516a5669fc39b4945cd0609a08264505.lua"))()
+    end
+})
+
+MainTab:AddButton({
+    Name = "GantengHUB(SEPUH/OLD)",
     Callback = function()
         loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/a5c3af437cd698d64379cf75cacb9281.lua"))()
     end
 })
 
-MainTab:AddButton({
-    Name = "GantengHUB REMAKE V1",
-    Callback = function()
-        getgenv().Team = "Pirates"
-        getgenv().FixCrash = false -- Turn it On For Hopping Server, Improve Performance But Silent Aim On Mob And Player
-        getgenv().FixCrash2 = false -- Turn it On For Hopping Server, Improve Performance But Will Remove Speed Changer
-        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3b2169cf53bc6104dabe8e19562e5cc2.lua"))()
-    end
-})
 -- Tab: Join Server
 local ServerTab = Window:MakeTab({
     Name = "Join Server",
