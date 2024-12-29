@@ -1,90 +1,36 @@
--- Load KeceHub Library
-local KeceHub = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
+-- Key Verification Script
+local userKey = "" -- Key yang diinput user
+local validKey = "BanuIsReal" -- Key yang valid
+local rawURL = "https://raw.githubusercontent.com/username/repo/branch/script.lua" -- Link raw script
+local monetizedLink = "https://link-center.net/1272037/key-for-script-andrehub" -- Link monetized untuk mendapatkan key
 
--- Variables
-local isKeyValid = false
-local keyInput = ""
-local validKey = "CRACKBYANDRE" -- Ganti dengan key yang valid
-
--- Main Window
-local Window = KeceHub:MakeWindow({
-    Name = "Ini 100% Punya Kece Hub",
-    HidePremium = false,
-    SaveConfig = true,
-    ConfigFolder = "KeceHubV2"
-})
-
--- Tab: Key System
-local KeyTab = Window:MakeTab({
-    Name = "Key System",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
-})
-
-KeyTab:AddLabel("Masukkan kunci untuk mengakses fitur Kece Hub")
-
-KeyTab:AddTextbox({
-    Name = "Input Key",
-    Default = "",
-    TextDisappear = true,
-    Callback = function(value)
-        keyInput = value
+-- Fungsi untuk mendapatkan raw key (misalnya, script dari URL raw)
+local function getRawScriptFromKey(key)
+    -- Jika key valid, kita ambil raw script dari URL
+    if key == validKey then
+        return game:HttpGet(rawURL)
+    else
+        return nil
     end
-})
+end
 
-KeyTab:AddButton({
-    Name = "Submit Key",
-    Callback = function()
-        if keyInput == validKey then
-            isKeyValid = true
-            KeceHub:MakeNotification({
-                Name = "Success",
-                Content = "Key valid! Anda sekarang dapat mengakses fitur.",
-                Image = "rbxassetid://4483345998",
-                Time = 5
-            })
-        else
-            KeceHub:MakeNotification({
-                Name = "Error",
-                Content = "Key salah! Coba lagi.",
-                Image = "rbxassetid://4483345998",
-                Time = 5
-            })
-        end
+-- Fungsi untuk mengecek key
+if userKey == validKey then
+    print("Key valid! Loading script...")
+    local rawScript = getRawScriptFromKey(userKey) -- Dapatkan script raw berdasarkan key
+    if rawScript then
+        loadstring(rawScript)() -- Load script dari raw URL jika key valid
+    else
+        print("Error: Unable to fetch raw script.")
     end
-})
+else
+    print("Invalid key. Please enter the correct key!")
+end
 
--- Tab: Main (Hanya jika key valid)
-local MainTab = Window:MakeTab({
-    Name = "Main",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
-})
-
-MainTab:AddLabel("Aktifkan fitur setelah validasi key.")
-MainTab:AddButton({
-    Name = "Start Features",
-    Callback = function()
-        if isKeyValid then
-            KeceHub:MakeNotification({
-                Name = "Access Granted",
-                Content = "Anda sekarang dapat menggunakan fitur utama.",
-                Image = "rbxassetid://4483345998",
-                Time = 5
-            })
-            
-            -- Masukkan semua fitur utama di sini
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/UserDevEthical/Loadstring/main/CokkaHub.lua"))()
-        else
-            KeceHub:MakeNotification({
-                Name = "Access Denied",
-                Content = "Key belum valid! Harap validasi terlebih dahulu.",
-                Image = "rbxassetid://4483345998",
-                Time = 5
-            })
-        end
-    end
-})
-
--- Initialize UI
-KeceHub:Init()
+-- Fungsi untuk menyalin link monetized ke clipboard (optional)
+if setclipboard then
+    setclipboard(monetizedLink) -- Menyalin link monetized untuk mendapatkan key
+    print("Link to get the key has been copied to clipboard!")
+else
+    print("Error: Your executor does not support clipboard functionality.")
+end
