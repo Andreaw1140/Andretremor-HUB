@@ -74,7 +74,7 @@ MainTab:AddToggle({
 
 -- Buttons
 MainTab:AddButton({
-    Name = "COKKA HUB NO KEY",
+    Name = "W-Azure (idk keyless or premium)",
     Callback = function()
         getgenv().Team = "Pirates"
         getgenv().AutoLoad = false --Will Load Script On Server Hop
