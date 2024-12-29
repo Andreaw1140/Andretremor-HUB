@@ -73,6 +73,7 @@ else
         task.wait(1)
     end
 end
+})
 
 -- Welcome Notification
 local function ShowWelcomeNotification()
