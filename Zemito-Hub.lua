@@ -1,24 +1,24 @@
--- Load KeceHub Library
-local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source", true))()
-OrionLib:ApplyTheme(OrionLib.Themes[OrionLib.SelectedTheme])
+-- Memuat ZemitoHub Library
+local ZemitoHub = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source", true))()
 
--- Tema Frost
-KeceHub.Themes["FrostTheme"] = {
-    Main = Color3.fromRGB(173, 216, 230),  -- Warna utama biru muda (Ice Blue)
-    Background = Color3.fromRGB(20, 30, 40),  -- Warna background gelap dengan sedikit biru
-    Accent = Color3.fromRGB(135, 206, 250),  -- Warna aksen biru langit terang
-    LightContrast = Color3.fromRGB(240, 248, 255),  -- Warna kontras terang (white smoke)
-    DarkContrast = Color3.fromRGB(0, 0, 50),  -- Warna kontras gelap biru gelap
-    TextColor = Color3.fromRGB(255, 255, 255)  -- Warna teks putih
-}
+-- Mengubah warna tema Frost setelah memuat ZemitoHub
+ZemitoHub.Themes.Frost.Main = Color3.fromRGB(173, 216, 230)  -- Biru muda
+ZemitoHub.Themes.Frost.Second = Color3.fromRGB(135, 206, 250)  -- Biru langit terang
+ZemitoHub.Themes.Frost.Stroke = Color3.fromRGB(0, 191, 255)  -- Biru terang
+ZemitoHub.Themes.Frost.Divider = Color3.fromRGB(240, 248, 255)  -- Putih kebiruan
+ZemitoHub.Themes.Frost.Text = Color3.fromRGB(255, 255, 255)  -- Teks putih
+ZemitoHub.Themes.Frost.TextDark = Color3.fromRGB(0, 0, 50)  -- Teks gelap biru gelap
 
--- Ganti tema yang digunakan di Window
-local Window = KeceHub:MakeWindow({
+-- Terapkan tema yang sudah diubah
+ZemitoHub:ApplyTheme(ZemitoHub.Themes.Frost)
+
+-- Membuat Window dengan tema Frost
+local Window = ZemitoHub:MakeWindow({
     Name = "Zemito Hub",
     HidePremium = false,
     SaveConfig = true,
-    ConfigFolder = "KeceHubV2",
-    Theme = "FrostTheme"  -- Ganti tema di sini
+    ConfigFolder = "ZemitoHubV2",
+    Theme = "Frost"  -- Terapkan tema Frost yang telah diubah
 })
 
 -- Variables
@@ -51,7 +51,7 @@ MainTab:AddToggle({
     Default = false,
     Callback = function(value)
         bypassStatus = value
-        KeceHub:MakeNotification({
+        ZemitoHub:MakeNotification({
             Name = "Info",
             Content = "Bypass " .. (value and "Enabled" or "Disabled"),
             Image = "rbxassetid://4483345998",
@@ -64,7 +64,7 @@ MainTab:AddToggle({
     Name = "Clear Report ON/OFF",
     Default = false,
     Callback = function(value)
-        KeceHub:MakeNotification({
+        ZemitoHub:MakeNotification({
             Name = "Info",
             Content = "Clear Report " .. (value and "Enabled" or "Disabled"),
             Image = "rbxassetid://4483345998",
@@ -120,14 +120,14 @@ BananaTab:AddButton({
     Callback = function()
         if setclipboard then
             setclipboard("https://ads.luarmor.net/get_key?for=VHFslhWdrPey")
-            KeceHub:MakeNotification({
+            ZemitoHub:MakeNotification({
                 Name = "Key Copied",
                 Content = "Key URL has been copied to clipboard!",
                 Image = "rbxassetid://4483345998",
                 Time = 5
             })
         else
-            KeceHub:MakeNotification({
+            ZemitoHub:MakeNotification({
                 Name = "Error",
                 Content = "Your executor does not support clipboard functionality.",
                 Image = "rbxassetid://4483345998",
@@ -143,7 +143,7 @@ BananaTab:AddTextbox({
     TextDisappear = true,
     Callback = function(value)
         keyInput = value
-        writefile("KeceHubKey.txt", keyInput)
+        writefile("ZemitoHubKey.txt", keyInput)
     end
 })
 
@@ -154,7 +154,7 @@ BananaTab:AddButton({
             getgenv().Key = keyInput
             loadstring(game:HttpGet("https://raw.githubusercontent.com/obiiyeuem/vthangsitink/main/BananaHub.lua"))()
         else
-            KeceHub:MakeNotification({
+            ZemitoHub:MakeNotification({
                 Name = "Error",
                 Content = "Please input a key before starting!",
                 Image = "rbxassetid://4483345998",
@@ -195,4 +195,4 @@ ServerTab:AddTextbox({
 })
 
 -- Initialize UI
-KeceHub:Init()
+ZemitoHub:Init()
