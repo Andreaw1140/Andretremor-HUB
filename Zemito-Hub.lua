@@ -1,44 +1,17 @@
--- Memuat ZemitoHub Library
-local ZemitoHub = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source", true))()
+-- Load ZamitoHub Library
+local ZamitoHub = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
 
--- Pengecekan apakah ZemitoHub berhasil dimuat
-if not ZemitoHub then
-    warn("Gagal memuat ZemitoHub!")
-else
-    print("ZemitoHub berhasil dimuat!")
-end
-
--- Mengubah warna tema Frost setelah memuat ZemitoHub
-ZemitoHub.Themes.Frost.Main = Color3.fromRGB(173, 216, 230)  -- Biru muda
-ZemitoHub.Themes.Frost.Second = Color3.fromRGB(135, 206, 250)  -- Biru langit terang
-ZemitoHub.Themes.Frost.Stroke = Color3.fromRGB(0, 191, 255)  -- Biru terang
-ZemitoHub.Themes.Frost.Divider = Color3.fromRGB(240, 248, 255)  -- Putih kebiruan
-ZemitoHub.Themes.Frost.Text = Color3.fromRGB(255, 255, 255)  -- Teks putih
-ZemitoHub.Themes.Frost.TextDark = Color3.fromRGB(0, 0, 50)  -- Teks gelap biru gelap
-
--- Terapkan tema yang sudah diubah
-ZemitoHub:ApplyTheme(ZemitoHub.Themes.Frost)
-print("Tema Frost diterapkan.")
-
--- Membuat Window dengan tema Frost
-local Window = ZemitoHub:MakeWindow({
-    Name = "Zemito Hub",
+-- Main Window
+local Window = ZamitoHub:MakeWindow({
+    Name = "ZamitoHUB",
     HidePremium = false,
     SaveConfig = true,
-    ConfigFolder = "ZemitoHubV2",
-    Theme = "Frost"  -- Terapkan tema Frost yang telah diubah
+    ConfigFolder = "ZamitoHubV2"
 })
-
--- Pengecekan apakah Window berhasil dibuat
-if Window then
-    print("Window berhasil dibuat.")
-else
-    warn("Gagal membuat Window!")
-end
 
 -- Variables
 local bypassStatus = false
-local keyInput = ""
+local startTime = os.clock()
 
 -- Tab: Status
 local StatusTab = Window:MakeTab({
@@ -48,10 +21,16 @@ local StatusTab = Window:MakeTab({
 })
 
 -- Status Display
-StatusTab:AddLabel("vozxcXandre")
-StatusTab:AddLabel("Masih Tahap Pengembangan")
-StatusTab:AddLabel("Ada Bug dm @andretremor")
-StatusTab:AddLabel("Atau gk kl Ada Bug dm @vozxc")
+StatusTab:AddLabel("STATUS SC: Free")
+StatusTab:AddLabel("DEV: DC(@andretremor)")
+StatusTab:AddLabel("INFO: For Bug @Andretremor(discord)")
+StatusTab:AddLabel("INFO: Kalo Ada Bug @vozxc")
+-- Update Ping and Bypass Status
+task.spawn(function()
+    while true do
+        task.wait(1) -- Interval pembaruan setiap 1 detik
+    end
+end)
 
 -- Tab: Main
 local MainTab = Window:MakeTab({
@@ -66,7 +45,7 @@ MainTab:AddToggle({
     Default = false,
     Callback = function(value)
         bypassStatus = value
-        ZemitoHub:MakeNotification({
+        ZamitoHub:MakeNotification({
             Name = "Info",
             Content = "Bypass " .. (value and "Enabled" or "Disabled"),
             Image = "rbxassetid://4483345998",
@@ -79,7 +58,7 @@ MainTab:AddToggle({
     Name = "Clear Report ON/OFF",
     Default = false,
     Callback = function(value)
-        ZemitoHub:MakeNotification({
+        ZamitoHub:MakeNotification({
             Name = "Info",
             Content = "Clear Report " .. (value and "Enabled" or "Disabled"),
             Image = "rbxassetid://4483345998",
@@ -90,15 +69,9 @@ MainTab:AddToggle({
 
 -- Buttons
 MainTab:AddButton({
-    Name = "W-Azure (idk keyless or premium)",
+    Name = "Zen (Keyless)",
     Callback = function()
-        getgenv().Team = "Pirates"
-        getgenv().AutoLoad = false --Will Load Script On Server Hop
-        getgenv().SlowLoadUi = false
-        getgenv().ForceUseSilentAimDashModifier = false --Force turn on silent aim, if error then executor problem
-        getgenv().ForceUseWalkSpeedModifier = false --Force turn on Walk Speed Modifier, if error then executor problem
-
-        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3b2169cf53bc6104dabe8e19562e5cc2.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenhubtop/zen_hub_pr/main/zennewwwwui.lua", true))()
     end
 })
 
@@ -110,14 +83,17 @@ MainTab:AddButton({
 })
 
 MainTab:AddButton({
-    Name = "Quantum Script (BETA)",
+    Name = "W-Azure",
     Callback = function()
-        loadstring(game:HttpGet("https://quantumonyx.xyz/MainHub/BetaTesting.lua"))()
+        getgenv().Team = "Pirates"
+        getgenv().FixCrash = false -- Turn it On For Hopping Server, Improve Performance But Silent Aim On Mob And Player
+        getgenv().FixCrash2 = false -- Turn it On For Hopping Server, Improve Performance But Will Remove Speed Changer
+        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3b2169cf53bc6104dabe8e19562e5cc2.lua"))()
     end
 })
 
 MainTab:AddButton({
-    Name = "RedzHub",
+    Name = "RedzHub (Not Support Luna)",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/realredz/BloxFruits/refs/heads/main/Source.lua"))()
     end
@@ -125,7 +101,7 @@ MainTab:AddButton({
 
 -- Tab: BANANA
 local BananaTab = Window:MakeTab({
-    Name = "BANANA (keyless)",
+    Name = "BANANA",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
@@ -135,14 +111,14 @@ BananaTab:AddButton({
     Callback = function()
         if setclipboard then
             setclipboard("https://ads.luarmor.net/get_key?for=VHFslhWdrPey")
-            ZemitoHub:MakeNotification({
+            ZamitoHub:MakeNotification({
                 Name = "Key Copied",
                 Content = "Key URL has been copied to clipboard!",
                 Image = "rbxassetid://4483345998",
                 Time = 5
             })
         else
-            ZemitoHub:MakeNotification({
+            ZamitoHub:MakeNotification({
                 Name = "Error",
                 Content = "Your executor does not support clipboard functionality.",
                 Image = "rbxassetid://4483345998",
@@ -152,13 +128,14 @@ BananaTab:AddButton({
     end
 })
 
+local keyInput = ""
 BananaTab:AddTextbox({
     Name = "Input Key",
     Default = "",
     TextDisappear = true,
     Callback = function(value)
         keyInput = value
-        writefile("ZemitoHubKey.txt", keyInput)
+        writefile("ZamitoHubKey.txt", keyInput)
     end
 })
 
@@ -169,7 +146,7 @@ BananaTab:AddButton({
             getgenv().Key = keyInput
             loadstring(game:HttpGet("https://raw.githubusercontent.com/obiiyeuem/vthangsitink/main/BananaHub.lua"))()
         else
-            ZemitoHub:MakeNotification({
+            ZamitoHub:MakeNotification({
                 Name = "Error",
                 Content = "Please input a key before starting!",
                 Image = "rbxassetid://4483345998",
@@ -179,14 +156,14 @@ BananaTab:AddButton({
     end
 })
 
--- Tab: Ganteng Hub
-local GantengHubTab = Window:MakeTab({
+-- Tab: ALCHEMY
+local AlchemyTab = Window:MakeTab({
     Name = "Ganteng Hub",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
 
-GantengHubTab:AddLabel("Coming Soon")
+AlchemyTab:AddLabel("COMING SOON")
 
 -- Tab: Join Server
 local ServerTab = Window:MakeTab({
@@ -202,6 +179,7 @@ ServerTab:AddTextbox({
     Default = "",
     TextDisappear = true,
     Callback = function(value)
+        -- Hapus karakter backtick dan simpan Job ID
         jobID = value:gsub("`", "")
         if jobID ~= "" then
             game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer("teleport", jobID)
@@ -209,6 +187,26 @@ ServerTab:AddTextbox({
     end
 })
 
--- Inisialisasi UI
-ZemitoHub:Init()
-print("ZemitoHub UI telah diinisialisasi.")
+-- Initialize UI
+ZamitoHub:Init()
+
+-- Override Welcome Message
+local notificationFrame = game:GetService("CoreGui"):FindFirstChild("Zamito Hub"):FindFirstChild("Notifications")
+if notificationFrame then
+    for _, child in pairs(notificationFrame:GetChildren()) do
+        if child.Name == "Welcome" then
+            child.Message.Text = "ZAMITO HUB (BETA)"
+        end
+    end
+end
+
+-- Menambahkan warna pada beberapa elemen UI
+ZamitoHub.Themes.Frost.Main = Color3.fromRGB(173, 216, 230)  -- Biru muda
+ZamitoHub.Themes.Frost.Second = Color3.fromRGB(135, 206, 250)  -- Biru langit terang
+ZamitoHub.Themes.Frost.Stroke = Color3.fromRGB(0, 191, 255)  -- Biru terang
+ZamitoHub.Themes.Frost.Divider = Color3.fromRGB(240, 248, 255)  -- Putih kebiruan
+ZamitoHub.Themes.Frost.Text = Color3.fromRGB(255, 255, 255)  -- Teks putih
+ZamitoHub.Themes.Frost.TextDark = Color3.fromRGB(0, 0, 50)  -- Teks gelap biru gelap
+
+-- Terapkan tema yang sudah diubah
+ZamitoHub:ApplyTheme(ZamitoHub.Themes.Frost)
