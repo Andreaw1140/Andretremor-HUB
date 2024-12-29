@@ -9,18 +9,19 @@ KeceHub.Themes["NeonVibes"] = {
     DarkContrast = Color3.fromRGB(30, 30, 40),
     TextColor = Color3.fromRGB(255, 255, 255)
 }
+
 -- Main Window
 local Window = KeceHub:MakeWindow({
-    Name = "    Zemito Hub",
+    Name = "Zemito Hub",
     HidePremium = false,
     SaveConfig = true,
-    ConfigFolder = "KeceHubV2"
-    Theme = "NeonVibes" -- Nama tema yang kamu pilih
+    ConfigFolder = "KeceHubV2",
+    Theme = "NeonVibes"
 })
 
 -- Variables
 local bypassStatus = false
-local startTime = os.clock()
+local keyInput = ""
 
 -- Tab: Status
 local StatusTab = Window:MakeTab({
@@ -31,15 +32,9 @@ local StatusTab = Window:MakeTab({
 
 -- Status Display
 StatusTab:AddLabel("vozxcXandre")
-StatusTab:AddLabel("Masih Tahap Penegembangan")
+StatusTab:AddLabel("Masih Tahap Pengembangan")
 StatusTab:AddLabel("Ada Bug dm @andretremor")
-StatusTab:AddLabel(" Atau gk kl Ada Bug dm @vozxc")
--- Update Ping and Bypass Status
-task.spawn(function()
-    while true do
-        task.wait(1) -- Interval pembaruan setiap 1 detik
-    end
-end)
+StatusTab:AddLabel("Atau gk kl Ada Bug dm @vozxc")
 
 -- Tab: Main
 local MainTab = Window:MakeTab({
@@ -81,12 +76,12 @@ MainTab:AddButton({
     Name = "COKKA HUB NO KEY",
     Callback = function()
         getgenv().Team = "Pirates"
-getgenv().AutoLoad = false --Will Load Script On Server Hop
-getgenv().SlowLoadUi  = false
-getgenv().ForceUseSilentAimDashModifier = false --Force turn on silent aim , if error then executor problem
-getgenv().ForceUseWalkSpeedModifier = false --Force turn on Walk Speed Modifier , if error then executor problem
+        getgenv().AutoLoad = false --Will Load Script On Server Hop
+        getgenv().SlowLoadUi = false
+        getgenv().ForceUseSilentAimDashModifier = false --Force turn on silent aim, if error then executor problem
+        getgenv().ForceUseWalkSpeedModifier = false --Force turn on Walk Speed Modifier, if error then executor problem
 
- loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3b2169cf53bc6104dabe8e19562e5cc2.lua"))()
+        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3b2169cf53bc6104dabe8e19562e5cc2.lua"))()
     end
 })
 
@@ -140,7 +135,6 @@ BananaTab:AddButton({
     end
 })
 
-local keyInput = ""
 BananaTab:AddTextbox({
     Name = "Input Key",
     Default = "",
@@ -168,14 +162,15 @@ BananaTab:AddButton({
     end
 })
 
--- Tab: ALCHEMY
+-- Tab: Ganteng Hub
 local GantengHubTab = Window:MakeTab({
     Name = "Ganteng Hub",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
-    
-    StatusTab:AddLabel("Coming Soon")
-    })
+})
+
+GantengHubTab:AddLabel("Coming Soon")
+
 -- Tab: Join Server
 local ServerTab = Window:MakeTab({
     Name = "Join Server",
@@ -190,7 +185,6 @@ ServerTab:AddTextbox({
     Default = "",
     TextDisappear = true,
     Callback = function(value)
-        -- Hapus karakter backtick dan simpan Job ID
         jobID = value:gsub("`", "")
         if jobID ~= "" then
             game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer("teleport", jobID)
@@ -200,13 +194,3 @@ ServerTab:AddTextbox({
 
 -- Initialize UI
 KeceHub:Init()
-
--- Override Welcome Message
-local notificationFrame = game:GetService("CoreGui"):FindFirstChild("Kece Hub"):FindFirstChild("Notifications")
-if notificationFrame then
-    for _, child in pairs(notificationFrame:GetChildren()) do
-        if child.Name == "Welcome" then
-            child.Message.Text = "KECE HUB V5"
-        end
-    end
-end
