@@ -1,22 +1,23 @@
 -- Load KeceHub Library
 local KeceHub = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
 
-KeceHub.Themes["NeonVibes"] = {
-    Main = Color3.fromRGB(255, 0, 255),
-    Background = Color3.fromRGB(20, 20, 30),
-    Accent = Color3.fromRGB(0, 255, 255),
-    LightContrast = Color3.fromRGB(50, 50, 60),
-    DarkContrast = Color3.fromRGB(30, 30, 40),
-    TextColor = Color3.fromRGB(255, 255, 255)
+-- Tema Frost
+KeceHub.Themes["FrostTheme"] = {
+    Main = Color3.fromRGB(173, 216, 230),  -- Warna utama biru muda (Ice Blue)
+    Background = Color3.fromRGB(20, 30, 40),  -- Warna background gelap dengan sedikit biru
+    Accent = Color3.fromRGB(135, 206, 250),  -- Warna aksen biru langit terang
+    LightContrast = Color3.fromRGB(240, 248, 255),  -- Warna kontras terang (white smoke)
+    DarkContrast = Color3.fromRGB(0, 0, 50),  -- Warna kontras gelap biru gelap
+    TextColor = Color3.fromRGB(255, 255, 255)  -- Warna teks putih
 }
 
--- Main Window
+-- Ganti tema yang digunakan di Window
 local Window = KeceHub:MakeWindow({
     Name = "Zemito Hub",
     HidePremium = false,
     SaveConfig = true,
     ConfigFolder = "KeceHubV2",
-    Theme = "NeonVibes"
+    Theme = "FrostTheme"  -- Ganti tema di sini
 })
 
 -- Variables
