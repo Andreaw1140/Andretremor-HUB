@@ -1,5 +1,6 @@
 -- Load KeceHub Library
-local KeceHub = loadstring(game:HttpGet("https://raw.githubusercontent.com/Andreaw1140/Andretremor-HUB/refs/heads/main/source"))()
+local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source", true))()
+OrionLib:ApplyTheme(OrionLib.Themes[OrionLib.SelectedTheme])
 
 -- Tema Frost
 KeceHub.Themes["FrostTheme"] = {
