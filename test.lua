@@ -1,7 +1,7 @@
 -- Key Verification Script
 local userKey = "" -- Key yang diinput user
 local validKey = "BanuIsReal" -- Key yang valid
-local rawURL = "https://raw.githubusercontent.com/username/repo/branch/script.lua" -- Link raw script
+local rawURL = "https://raw.githubusercontent.com/Andreaw1140/Andretremor-HUB/refs/heads/main/Crack-Kece-hub.lua" -- Link raw script
 local monetizedLink = "https://link-center.net/1272037/key-for-script-andrehub" -- Link monetized untuk mendapatkan key
 
 -- Fungsi untuk mendapatkan raw key (misalnya, script dari URL raw)
