@@ -22,7 +22,16 @@ local OrionLib = {
 			TextDark = Color3.fromRGB(150, 150, 150)
 		}
 	},
-	SelectedTheme = "Default",
+    Frost = {  -- Tema Frost
+        Main = Color3.fromRGB(173, 216, 230),  -- Warna biru muda (Ice Blue)
+        Second = Color3.fromRGB(135, 206, 250),  -- Biru langit terang
+        Stroke = Color3.fromRGB(0, 191, 255),  -- Biru terang
+        Divider = Color3.fromRGB(240, 248, 255),  -- Putih kebiruan
+        Text = Color3.fromRGB(255, 255, 255),  -- Teks putih
+        TextDark = Color3.fromRGB(0, 0, 50)  -- Teks gelap (biru gelap)
+    }
+}
+	SelectedTheme = "Frost",
 	Folder = nil,
 	SaveCfg = false
 }
