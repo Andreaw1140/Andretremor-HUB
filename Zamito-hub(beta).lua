@@ -8,13 +8,13 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "FluentV1 " .. Fluent.Version,
-    SubTitle = "@AndreTremor",
+    Title = "Fluent " .. Fluent.Version,
+    SubTitle = "by @andretremor",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
-    Acrylic = true,
+    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
     Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl
+    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
 })
 
 local Tabs = {
@@ -22,10 +22,14 @@ local Tabs = {
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
-local KeyTab = Tabs.Main:AddTab({ Title = "Key System", Icon = "key" })
+-- Debug: Verify tabs are created
+print("Tabs created:", Tabs.Main, Tabs.Settings)
+
+-- Adding elements to the "Main" tab
+local MainTab = Tabs.Main
 
 -- Get Key Button
-KeyTab:AddButton({
+MainTab:AddButton({
     Title = "Get Key",
     Description = "Click to copy the key URL",
     Callback = function()
@@ -38,10 +42,11 @@ KeyTab:AddButton({
     end
 })
 
+-- Key validation input
 local validKey = "BanuIsReal"
 local keyInput = ""
 
-KeyTab:AddInput("KeyInput", {
+MainTab:AddInput("KeyInput", {
     Title = "Enter Key",
     Placeholder = "Enter your key here",
     Callback = function(Value)
@@ -49,7 +54,8 @@ KeyTab:AddInput("KeyInput", {
     end
 })
 
-KeyTab:AddButton({
+-- Button to validate key and load script
+MainTab:AddButton({
     Title = "Validate Key",
     Description = "Click to validate your key",
     Callback = function()
@@ -70,6 +76,7 @@ KeyTab:AddButton({
     end
 })
 
+-- Select the "Main" tab to show it initially
 Window:SelectTab(1)
 
 Fluent:Notify({
@@ -78,6 +85,7 @@ Fluent:Notify({
     Duration = 8
 })
 
+-- Add save and interface management (if needed)
 SaveManager:SetLibrary(Fluent)
 InterfaceManager:SetLibrary(Fluent)
 
