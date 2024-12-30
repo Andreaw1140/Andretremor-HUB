@@ -4,7 +4,7 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 
 local Window = Fluent:CreateWindow({
     Title = "Fluent " .. Fluent.Version,
-    SubTitle = "by dawid",
+    SubTitle = "by andre",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
     Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
@@ -17,16 +17,27 @@ local Tabs = {
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
-local Options = Fluent.Options
-
--- Key validation variables
-local validKey = "BanuIsReal" -- Ganti dengan key valid Anda
-local keyInput = ""
-
--- Tab untuk Key System
+-- Key System Tab
 local KeyTab = Tabs.Main:AddTab({ Title = "Key System", Icon = "key" })
 
--- Input untuk key
+-- Button to get Key URL
+KeyTab:AddButton({
+    Title = "Get Key",
+    Description = "Click to copy the key URL",
+    Callback = function()
+        if setclipboard then
+            setclipboard("https://linkvertise.com/1272037/key-for-script-andrehub?o=sharing")
+            Fluent:Notify("Key Copied", "Key URL has been copied to clipboard!", 3)
+        else
+            Fluent:Notify("Error", "Your executor does not support clipboard functionality.", 3)
+        end
+    end
+})
+
+-- Key validation input
+local validKey = "BanuIsReal"
+local keyInput = ""
+
 KeyTab:AddInput("KeyInput", {
     Title = "Enter Key",
     Placeholder = "Enter your key here",
@@ -35,7 +46,7 @@ KeyTab:AddInput("KeyInput", {
     end
 })
 
--- Tombol untuk validasi key
+-- Button to validate key and load script
 KeyTab:AddButton({
     Title = "Validate Key",
     Description = "Click to validate your key",
@@ -46,7 +57,7 @@ KeyTab:AddButton({
                 Content = "Key is valid. Loading script...",
                 Duration = 5
             })
-            -- Load main script
+            -- Load your main script
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Andreaw1140/Andretremor-HUB/refs/heads/main/Zemito-Hub.lua", true))()
         else
             Fluent:Notify({
@@ -58,38 +69,6 @@ KeyTab:AddButton({
     end
 })
 
--- Menambahkan opsi lain (misalnya slider dan dropdown) di tab utama
-Tabs.Main:AddParagraph({
-    Title = "Fluent Script UI",
-    Content = "This is a UI for your script!"
-})
-
-local Slider = Tabs.Main:AddSlider("Slider", {
-    Title = "Slider",
-    Description = "This is a slider",
-    Default = 2,
-    Min = 0,
-    Max = 5,
-    Rounding = 1,
-    Callback = function(Value)
-        print("Slider was changed:", Value)
-    end
-})
-
-Slider:SetValue(3)
-
--- Menambahkan pengaturan dan opsi lainnya
-SaveManager:SetLibrary(Fluent)
-InterfaceManager:SetLibrary(Fluent)
-
--- Membangun interface dan menyimpan pengaturan
-SaveManager:SetFolder("FluentScriptHub")
-InterfaceManager:SetFolder("FluentScriptHub/specific-game")
-
-InterfaceManager:BuildInterfaceSection(Tabs.Settings)
-SaveManager:BuildConfigSection(Tabs.Settings)
-
--- Memilih tab pertama (Key System)
 Window:SelectTab(1)
 
 Fluent:Notify({
@@ -98,5 +77,14 @@ Fluent:Notify({
     Duration = 8
 })
 
--- Memuat konfigurasi otomatis
+-- Save configuration & interface setup
+SaveManager:SetLibrary(Fluent)
+InterfaceManager:SetLibrary(Fluent)
+
+SaveManager:SetFolder("FluentScriptHub")
+InterfaceManager:SetFolder("FluentScriptHub/specific-game")
+
+InterfaceManager:BuildInterfaceSection(Tabs.Settings)
+SaveManager:BuildConfigSection(Tabs.Settings)
+
 SaveManager:LoadAutoloadConfig()
