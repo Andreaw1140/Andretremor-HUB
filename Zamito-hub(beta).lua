@@ -1,40 +1,33 @@
-- Load Fluent Library
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-
--- Variables
-local validKey = "BanuIsReal"  -- Ganti dengan key Anda
+-- Key validation variables
+local validKey = "BanuIsReal" -- Ganti dengan key valid Anda
 local keyInput = ""
 
--- Fluent UI Creation
-local Window = Fluent:Create("ZamitoHub - Key System")
-local Tab = Window:Tab("Key System")
-local Section = Tab:Section("Validation")
-
--- Get Key Button
-Section:Button("Get Key", function()
-    if setclipboard then
-        setclipboard("https://linkvertise.com/1272037/key-for-script-andrehub?o=sharing")
-        Fluent:Notify("Key Copied", "Key URL has been copied to clipboard!", 3)
-    else
-        Fluent:Notify("Error", "Your executor does not support clipboard functionality.", 3)
+Tabs.Main:AddInput("KeyInput", {
+    Title = "Enter Key",
+    Placeholder = "Enter your key here",
+    Callback = function(Value)
+        keyInput = Value
     end
-end)
+})
 
--- Key Input
-Section:Textbox("Enter Key", "", function(value)
-    keyInput = value
-end)
-
--- Start Script Button
-Section:Button("Start Script", function()
-    if keyInput == validKey then
-        Fluent:Notify("Success", "Key is valid. Loading script...", 3)
-        -- Load your main script
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Andreaw1140/Andretremor-HUB/refs/heads/main/Zemito-Hub.lua", true))()
-    else
-        Fluent:Notify("Error", "Invalid key. Please try again.", 3)
+Tabs.Main:AddButton({
+    Title = "Validate Key",
+    Description = "Click to validate your key",
+    Callback = function()
+        if keyInput == validKey then
+            Fluent:Notify({
+                Title = "Success",
+                Content = "Key is valid. Loading script...",
+                Duration = 5
+            })
+            -- Load main script
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/Andreaw1140/Andretremor-HUB/refs/heads/main/Zemito-Hub.lua", true))()
+        else
+            Fluent:Notify({
+                Title = "Error",
+                Content = "Invalid key. Please try again.",
+                Duration = 5
+            })
+        end
     end
-end)
-
--- Show the UI
-Window:Display()
+})
