@@ -1,5 +1,5 @@
 - Load Fluent Library
-local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/NotLynix/Fluent/main/source.lua"))()
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
 -- Variables
 local validKey = "BanuIsReal"  -- Ganti dengan key Anda
