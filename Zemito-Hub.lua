@@ -178,7 +178,7 @@ GantengTab:AddButton({
     end
 })
 
- Tab: HutaoTab
+-- Tab: HutaoTab (Corrected)
 local HutaoTab = Window:MakeTab({
     Name = "Hutao (keyless)",
     Icon = "rbxassetid://4483345998",
@@ -261,22 +261,4 @@ ServerTab:AddTextbox({
 -- Apply Theme Frost
 ZamitoHub.Themes.Frost.Main = Color3.fromRGB(173, 216, 230)  -- Biru muda
 ZamitoHub.Themes.Frost.Second = Color3.fromRGB(135, 206, 250)  -- Biru langit terang
-ZamitoHub.Themes.Frost.Stroke = Color3.fromRGB(0, 191, 255)  -- Biru terang
-ZamitoHub.Themes.Frost.Divider = Color3.fromRGB(240, 248, 255)  -- Putih kebiruan
-ZamitoHub.Themes.Frost.Text = Color3.fromRGB(255, 255, 255)  -- Teks putih
-ZamitoHub.Themes.Frost.TextDark = Color3.fromRGB(0, 0, 50)  -- Teks gelap biru gelap
-
--- Terapkan tema yang sudah diubah
-ZamitoHub:ApplyTheme(ZamitoHub.Themes.Frost)
-
--- Initialize UI
-ZamitoHub:Init()
-
--- Override Welcome Message
-local notificationFrame = game:GetService("CoreGui"):FindFirstChild("Zamito Hub")
-if notificationFrame then
-    local welcomeMessage = notificationFrame:FindFirstChild("Notifications"):FindFirstChild("Welcome")
-    if welcomeMessage then
-        welcomeMessage.Message.Text = "ZAMITO HUB (BETA)"
-    end
-end
+ZamitoHub.The
