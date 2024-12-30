@@ -1,15 +1,20 @@
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+if not Fluent then
+    warn("Fluent failed to load.")
+    return
+end
+
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Fluent " .. Fluent.Version,
-    SubTitle = "by andre",
+    Title = "FluentV1 " .. Fluent.Version,
+    SubTitle = "@AndreTremor",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
-    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+    Acrylic = true,
     Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+    MinimizeKey = Enum.KeyCode.LeftControl
 })
 
 local Tabs = {
@@ -17,10 +22,9 @@ local Tabs = {
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
--- Key System Tab
 local KeyTab = Tabs.Main:AddTab({ Title = "Key System", Icon = "key" })
 
--- Button to get Key URL
+-- Get Key Button
 KeyTab:AddButton({
     Title = "Get Key",
     Description = "Click to copy the key URL",
@@ -34,7 +38,6 @@ KeyTab:AddButton({
     end
 })
 
--- Key validation input
 local validKey = "BanuIsReal"
 local keyInput = ""
 
@@ -46,7 +49,6 @@ KeyTab:AddInput("KeyInput", {
     end
 })
 
--- Button to validate key and load script
 KeyTab:AddButton({
     Title = "Validate Key",
     Description = "Click to validate your key",
@@ -57,7 +59,6 @@ KeyTab:AddButton({
                 Content = "Key is valid. Loading script...",
                 Duration = 5
             })
-            -- Load your main script
             loadstring(game:HttpGet("https://raw.githubusercontent.com/Andreaw1140/Andretremor-HUB/refs/heads/main/Zemito-Hub.lua", true))()
         else
             Fluent:Notify({
@@ -77,7 +78,6 @@ Fluent:Notify({
     Duration = 8
 })
 
--- Save configuration & interface setup
 SaveManager:SetLibrary(Fluent)
 InterfaceManager:SetLibrary(Fluent)
 
