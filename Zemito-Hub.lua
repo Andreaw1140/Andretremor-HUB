@@ -245,7 +245,7 @@ local AlchemyTab = Window:MakeTab({
 })
 
 -- Buttons
-MainTab:AddButton({
+AlchemyTab:AddButton({
     Name = "Alchemy(Keyless)",
     Callback = function()
         loadstring(game:HttpGet("https://scripts.alchemyhub.xyz"))()
