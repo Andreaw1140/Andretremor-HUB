@@ -25,6 +25,7 @@ StatusTab:AddLabel("STATUS SC: Free")
 StatusTab:AddLabel("DEV: DC(@andretremor)")
 StatusTab:AddLabel("INFO: For Bug @Andretremor(discord)")
 StatusTab:AddLabel("INFO: Kalo Ada Bug @vozxc")
+
 -- Update Ping and Bypass Status
 task.spawn(function()
     while true do
@@ -156,24 +157,83 @@ BananaTab:AddButton({
     end
 })
 
--- Tab: ALCHEMY
+-- Tab: GantengTab
 local GantengTab = Window:MakeTab({
     Name = "Ganteng Hub",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
 
-MainTab:AddButton({
+GantengTab:AddButton({
     Name = "GantengHUB (REMAKE V1)",
     Callback = function()
         loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/516a5669fc39b4945cd0609a08264505.lua"))()
     end
 })
 
-MainTab:AddButton({
+GantengTab:AddButton({
     Name = "GantengHUB(SEPUH/OLD)",
     Callback = function()
         loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/a5c3af437cd698d64379cf75cacb9281.lua"))()
+    end
+})
+
+ Tab: HutaoTab
+local HutaoTab = Window:MakeTab({
+    Name = "Hutao (keyless)",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- Add Textbox for Key Input
+HutaoTab:AddTextbox({
+    Name = "Input Key",
+    Default = "",
+    TextDisappear = true,
+    Callback = function(value)
+        keyInput = value
+        writefile("ZamitoHubKey.txt", keyInput)  -- Menyimpan key input ke file jika dibutuhkan
+    end
+})
+
+-- Button untuk Menjalankan Skrip menggunakan Key
+HutaoTab:AddButton({
+    Name = "Start",
+    Callback = function()
+        if keyInput ~= "" then
+            -- Menjalankan skrip berdasarkan key yang dimasukkan
+            getgenv().Key = keyInput
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/HutaoHubs/Hutaohubs2.0/refs/heads/main/Bloxfruit3.lua"))()  -- Ganti dengan URL yang sesuai
+        else
+            ZamitoHub:MakeNotification({
+                Name = "Error",
+                Content = "Please input a key before starting!",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+        end
+    end
+})
+
+HutaoTab:AddButton({
+    Name = "Get Key",
+    Callback = function()
+        if setclipboard then
+            setclipboard("https://linkvertise.com/1232655/key-fisch-hutao-hub?o=sharing")  -- Link untuk key
+            ZamitoHub:MakeNotification({
+                Name = "Key Copied",
+                Content = "Key URL has been copied to clipboard!",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+        else
+            ZamitoHub:MakeNotification({
+                Name = "Error",
+                Content = "Your executor does not support clipboard functionality.",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+        end
     end
 })
 
@@ -184,14 +244,13 @@ local ServerTab = Window:MakeTab({
     PremiumOnly = false
 })
 
+-- Job ID
 local jobID = ""
-
 ServerTab:AddTextbox({
     Name = "Input Job ID",
     Default = "",
     TextDisappear = true,
     Callback = function(value)
-        -- Hapus karakter backtick dan simpan Job ID
         jobID = value:gsub("`", "")
         if jobID ~= "" then
             game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer("teleport", jobID)
@@ -199,20 +258,7 @@ ServerTab:AddTextbox({
     end
 })
 
--- Initialize UI
-ZamitoHub:Init()
-
--- Override Welcome Message
-local notificationFrame = game:GetService("CoreGui"):FindFirstChild("Zamito Hub"):FindFirstChild("Notifications")
-if notificationFrame then
-    for _, child in pairs(notificationFrame:GetChildren()) do
-        if child.Name == "Welcome" then
-            child.Message.Text = "ZAMITO HUB (BETA)"
-        end
-    end
-end
-
--- Menambahkan warna pada beberapa elemen UI
+-- Apply Theme Frost
 ZamitoHub.Themes.Frost.Main = Color3.fromRGB(173, 216, 230)  -- Biru muda
 ZamitoHub.Themes.Frost.Second = Color3.fromRGB(135, 206, 250)  -- Biru langit terang
 ZamitoHub.Themes.Frost.Stroke = Color3.fromRGB(0, 191, 255)  -- Biru terang
@@ -222,3 +268,15 @@ ZamitoHub.Themes.Frost.TextDark = Color3.fromRGB(0, 0, 50)  -- Teks gelap biru g
 
 -- Terapkan tema yang sudah diubah
 ZamitoHub:ApplyTheme(ZamitoHub.Themes.Frost)
+
+-- Initialize UI
+ZamitoHub:Init()
+
+-- Override Welcome Message
+local notificationFrame = game:GetService("CoreGui"):FindFirstChild("Zamito Hub")
+if notificationFrame then
+    local welcomeMessage = notificationFrame:FindFirstChild("Notifications"):FindFirstChild("Welcome")
+    if welcomeMessage then
+        welcomeMessage.Message.Text = "ZAMITO HUB (BETA)"
+    end
+end
