@@ -259,12 +259,12 @@ ServerTab:AddTextbox({
 })
 
 -- Apply Theme Frost
-ZamitoHub.Themes.Frost.Main = Color3.fromRGB(173, 216, 230)  -- Biru muda
-ZamitoHub.Themes.Frost.Second = Color3.fromRGB(135, 206, 250)  -- Biru langit terang
-ZamitoHub.Themes.Frost.Stroke = Color3.fromRGB(0, 191, 255)  -- Biru terang
-ZamitoHub.Themes.Frost.Divider = Color3.fromRGB(240, 248, 255)  -- Putih kebiruan
-ZamitoHub.Themes.Frost.Text = Color3.fromRGB(255, 255, 255)  -- Teks putih
-ZamitoHub.Themes.Frost.TextDark = Color3.fromRGB(0, 0, 50)  -- Teks gelap biru gelap
+ZamitoHub.Themes.Frost.Main = Color3.fromRGB(50, 50, 50)  -- Abu-abu gelap
+ZamitoHub.Themes.Frost.Second = Color3.fromRGB(139, 0, 0)  -- Merah gelap (lebih misterius)
+ZamitoHub.Themes.Frost.Stroke = Color3.fromRGB(205, 92, 92)  -- Merah lembut (soft red)
+ZamitoHub.Themes.Frost.Divider = Color3.fromRGB(70, 70, 70)  -- Divider gelap
+ZamitoHub.Themes.Frost.Text = Color3.fromRGB(240, 240, 240)  -- Teks putih agak terang
+ZamitoHub.Themes.Frost.TextDark = Color3.fromRGB(255, 69, 0)  -- Teks gelap dengan aksen merah terang
 
 -- Terapkan tema yang sudah diubah
 ZamitoHub:ApplyTheme(ZamitoHub.Themes.Frost)
