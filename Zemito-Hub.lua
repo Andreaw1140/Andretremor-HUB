@@ -239,7 +239,7 @@ HutaoTab:AddButton({
 
 -- Tab: Main
 local AlchemyTab = Window:MakeTab({
-    Name = "Main",
+    Name = "Alchemy",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
