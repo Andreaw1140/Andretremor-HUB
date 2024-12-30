@@ -9,6 +9,90 @@ local Window = ZamitoHub:MakeWindow({
     ConfigFolder = "ZamitoHubV2"
 })
 
+-- Sistem Key untuk Login
+local Authenticated = false
+local RequiredKey = "BanuIsReal"  -- Password yang diperlukan untuk login
+local KeyStorage = game:GetService("Workspace"):FindFirstChild("ZamitoHubKey")  -- Menyimpan key di Workspace
+
+-- Fungsi untuk menyimpan key ke Workspace
+local function SaveKeyToWorkspace(key)
+    if not game:GetService("Workspace"):FindFirstChild("ZamitoHubKey") then
+        local KeyObject = Instance.new("StringValue", game:GetService("Workspace"))
+        KeyObject.Name = "ZamitoHubKey"
+        KeyObject.Value = key
+    end
+end
+
+-- URL Key yang akan disalin
+local keyURL = "https://linkvertise.com/1272037/key-for-script-andrehub?o=sharing"
+
+-- Jika Key sudah tersimpan dan valid, otomatis autentikasi
+if KeyStorage and KeyStorage.Value == RequiredKey then
+    Authenticated = true
+    ZamitoHub:MakeNotification({
+        Name = "Welcome Back",
+        Content = "Key valid! Welcome to ZamitoHub!",
+        Time = 5,
+        Image = "rbxassetid://4483345998"
+    })
+else
+    -- Tab Key Authentication
+    local KeyTab = ZamitoHub:MakeTab({
+        Name = "Key Authentication",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
+    })
+
+    KeyTab:AddTextbox({
+        Name = "Enter Key",
+        Default = "",
+        TextDisappear = true,
+        Callback = function(value)
+            -- Validasi Key
+            if value == RequiredKey then
+                Authenticated = true
+                SaveKeyToWorkspace(value)  -- Simpan key ke Workspace
+
+                ZamitoHub:MakeNotification({
+                    Name = "Success",
+                    Content = "Key accepted! Welcome to ZamitoHub!",
+                    Time = 5,
+                    Image = "rbxassetid://4483345998"
+                })
+
+                -- Tambahkan tombol "Get Key" setelah key diterima
+                KeyTab:AddButton({
+                    Name = "Get Key",
+                    Callback = function()
+                        setclipboard(keyURL)  -- Salin URL key ke clipboard
+                        ZamitoHub:MakeNotification({
+                            Name = "Key Copied",
+                            Content = "Key URL has been copied to clipboard!",
+                            Time = 5,
+                            Image = "rbxassetid://4483345998"
+                        })
+                    end
+                })
+
+                -- Hapus KeyTab setelah key benar
+                ZamitoHub:DestroyTab(KeyTab)
+            else
+                ZamitoHub:MakeNotification({
+                    Name = "Invalid Key",
+                    Content = "Incorrect key, please try again.",
+                    Time = 5,
+                    Image = "rbxassetid://4483345998"
+                })
+            end
+        end
+    })
+
+    -- Tunggu hingga key benar sebelum melanjutkan
+    while not Authenticated do
+        task.wait(1)
+    end
+end
+
 -- Variables
 local bypassStatus = false
 local startTime = os.clock()
