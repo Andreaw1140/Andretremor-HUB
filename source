@@ -8,33 +8,24 @@ local Mouse = LocalPlayer:GetMouse()
 local HttpService = game:GetService("HttpService")
 
 local OrionLib = {
-    Elements = {},
-    ThemeObjects = {},
-    Connections = {},
-    Flags = {},
-    Themes = {
-        Default = {
-            Main = Color3.fromRGB(25, 25, 25),
-            Second = Color3.fromRGB(32, 32, 32),
-            Stroke = Color3.fromRGB(60, 60, 60),
-            Divider = Color3.fromRGB(60, 60, 60),
-            Text = Color3.fromRGB(240, 240, 240),
-            TextDark = Color3.fromRGB(150, 150, 150)
-        },
-        Frost = {  -- Tema Frost
-            Main = Color3.fromRGB(173, 216, 230),  -- Warna biru muda (Ice Blue)
-            Second = Color3.fromRGB(135, 206, 250),  -- Biru langit terang
-            Stroke = Color3.fromRGB(0, 191, 255),  -- Biru terang
-            Divider = Color3.fromRGB(240, 248, 255),  -- Putih kebiruan
-            Text = Color3.fromRGB(255, 255, 255),  -- Teks putih
-            TextDark = Color3.fromRGB(0, 0, 50)  -- Teks gelap (biru gelap)
-        }
-    },
-    SelectedTheme = "Frost",  -- Pastikan ini ada di dalam objek OrionLib
-    Folder = nil,
-    SaveCfg = false
+	Elements = {},
+	ThemeObjects = {},
+	Connections = {},
+	Flags = {},
+	Themes = {
+		Default = {
+			Main = Color3.fromRGB(135, 206, 250), -- Frost (Sky Blue)
+			Second = Color3.fromRGB(255, 69, 0),  -- Fire (Red-Orange)
+			Stroke = Color3.fromRGB(255, 165, 0), -- Transition (Orange)
+			Divider = Color3.fromRGB(135, 206, 250), -- Frost
+			Text = Color3.fromRGB(240, 240, 240), -- Putih
+			TextDark = Color3.fromRGB(255, 69, 0) -- Fire
+		}
+	},
+	SelectedTheme = "Default",
+	Folder = nil,
+	SaveCfg = false
 }
-
 
 --Feather Icons https://github.com/evoincorp/lucideblox/tree/master/src/modules/util - Created by 7kayoh
 local Icons = {}
