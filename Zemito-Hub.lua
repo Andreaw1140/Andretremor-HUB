@@ -237,6 +237,21 @@ HutaoTab:AddButton({
     end
 })
 
+-- Tab: Main
+local AlchemyTab = Window:MakeTab({
+    Name = "Main",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- Buttons
+MainTab:AddButton({
+    Name = "Alchemy(Keyless)",
+    Callback = function()
+        loadstring(game:HttpGet("https://scripts.alchemyhub.xyz"))()
+    end
+})
+
 -- Tab: Join Server
 local ServerTab = Window:MakeTab({
     Name = "Join Server",
