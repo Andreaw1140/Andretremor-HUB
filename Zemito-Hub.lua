@@ -92,6 +92,14 @@ MainTab:AddButton({
         loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3b2169cf53bc6104dabe8e19562e5cc2.lua"))()
     end
 })
+MainTab:AddButton({
+    Name = "COKKA HUB",
+    Callback = function()
+        _G.Key = "Xzt7M9IAfF"
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/UserDevEthical/Loadstring/main/CokkaHub.lua"))()
+    end
+})
+
 
 MainTab:AddButton({
     Name = "RedzHub (Not Support Luna)",
