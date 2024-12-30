@@ -8,24 +8,34 @@ local Mouse = LocalPlayer:GetMouse()
 local HttpService = game:GetService("HttpService")
 
 local OrionLib = {
-	Elements = {},
-	ThemeObjects = {},
-	Connections = {},
-	Flags = {},
-	Themes = {
-		Default = {
-			Main = Color3.fromRGB(135, 206, 250), -- Frost (Sky Blue)
-			Second = Color3.fromRGB(255, 69, 0),  -- Fire (Red-Orange)
-			Stroke = Color3.fromRGB(255, 165, 0), -- Transition (Orange)
-			Divider = Color3.fromRGB(135, 206, 250), -- Frost
-			Text = Color3.fromRGB(240, 240, 240), -- Putih
-			TextDark = Color3.fromRGB(255, 69, 0) -- Fire
-		}
-	},
-	SelectedTheme = "Default",
-	Folder = nil,
-	SaveCfg = false
+    Elements = {},
+    ThemeObjects = {},
+    Connections = {},
+    Flags = {},
+    Themes = {
+        Default = {
+            -- Warna untuk elemen UI
+            Main = Color3.fromRGB(50, 50, 50), -- Abu-abu gelap (lebih netral dan sedikit elegan)
+            Second = Color3.fromRGB(139, 0, 0),  -- Merah gelap (lebih misterius)
+            Stroke = Color3.fromRGB(205, 92, 92), -- Merah lembut
+            Divider = Color3.fromRGB(70, 70, 70), -- Lebih gelap dari background
+            Text = Color3.fromRGB(240, 240, 240), -- Putih agak terang
+            TextDark = Color3.fromRGB(255, 69, 0), -- Merah terang untuk teks penting
+            Background = Color3.fromRGB(30, 30, 30),  -- Latar belakang gelap (misterius, elegan)
+            HeaderBackground = Color3.fromRGB(45, 45, 45), -- Header dengan latar belakang gelap lebih soft
+            ButtonBackground = Color3.fromRGB(50, 50, 50), -- Tombol dengan latar belakang sedikit lebih terang
+            ButtonHover = Color3.fromRGB(255, 165, 0), -- Hover oranye (terang, tapi masih enak dipandang)
+            BorderColor = Color3.fromRGB(255, 165, 0), -- Border tombol oranye yang memberi aksen
+            DividerColor = Color3.fromRGB(100, 100, 100) -- Divider dengan warna abu-abu yang tidak terlalu mencolok
+        }
+    },
+    SelectedTheme = "Default",
+    Folder = nil,
+    SaveCfg = false
 }
+
+-- Kamu bisa menggunakan elemen tema ini di kode UI kamu.
+
 
 --Feather Icons https://github.com/evoincorp/lucideblox/tree/master/src/modules/util - Created by 7kayoh
 local Icons = {}
