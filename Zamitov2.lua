@@ -3,6 +3,12 @@ local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
+-- Verify Fluent is loaded
+if not Fluent then
+    warn("Failed to load Fluent.")
+    return
+end
+
 -- Create Main Window
 local Window = Fluent:CreateWindow({
     Title = "ZamitoHUB (Fluent Version)",
@@ -22,7 +28,7 @@ local Tabs = {
     Ganteng = Window:AddTab({ Title = "Ganteng", Icon = "rbxassetid://4483345998" }),
     Hutao = Window:AddTab({ Title = "Hutao", Icon = "rbxassetid://4483345998" }),
     Alchemy = Window:AddTab({ Title = "Alchemy", Icon = "rbxassetid://4483345998" }),
-    Server = Window:AddTab({ Title = "Join Server", Icon = "rbxassetid://4483345998" }),
+    Server = Window:AddTab({ Title = "Join Server", Icon = "rbxassetid://4483345998" })
 }
 
 -- Status Tab
@@ -66,20 +72,20 @@ Tabs.Banana:AddButton({
     end
 })
 
-local keyInput = ""
+local bananaKeyInput = ""
 Tabs.Banana:AddInput("KeyInput", {
     Title = "Input Key",
     Placeholder = "Enter your key here",
     Callback = function(value)
-        keyInput = value
+        bananaKeyInput = value
     end
 })
 
 Tabs.Banana:AddButton({
     Title = "Start",
     Callback = function()
-        if keyInput ~= "" then
-            getgenv().Key = keyInput
+        if bananaKeyInput ~= "" then
+            getgenv().Key = bananaKeyInput
             loadstring(game:HttpGet("https://raw.githubusercontent.com/obiiyeuem/vthangsitink/main/BananaHub.lua"))()
         else
             Fluent:Notify("Error", "Please input a key before starting!", 5)
@@ -96,19 +102,20 @@ Tabs.Ganteng:AddButton({
 })
 
 -- Hutao Tab
+local hutaoKeyInput = ""
 Tabs.Hutao:AddInput("KeyInputHutao", {
     Title = "Input Key",
     Placeholder = "Enter your key here",
     Callback = function(value)
-        keyInput = value
+        hutaoKeyInput = value
     end
 })
 
 Tabs.Hutao:AddButton({
     Title = "Start",
     Callback = function()
-        if keyInput ~= "" then
-            getgenv().Key = keyInput
+        if hutaoKeyInput ~= "" then
+            getgenv().Key = hutaoKeyInput
             loadstring(game:HttpGet("https://raw.githubusercontent.com/HutaoHubs/Hutaohubs2.0/refs/heads/main/Bloxfruit3.lua"))()
         else
             Fluent:Notify("Error", "Please input a key before starting!", 5)
