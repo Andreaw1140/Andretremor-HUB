@@ -12,7 +12,7 @@ end
 -- Create Main Window
 local Window = Fluent:CreateWindow({
     Title = "ZamitoHUB (Fluent Version)",
-    SubTitle = "BETA v1.0 by Andreaw",
+    SubTitle = "By @AndreTremor",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
     Acrylic = true,
