@@ -46,7 +46,7 @@ end
 -- Fungsi untuk membuat GUI menggunakan ZamitoHub
 local function createMenuGUI()
     -- Membuat window dengan ZamitoHub
-    local window = ZamitoHub:CreateWindow("Verification Process", true)
+    local window = ZamitoHub:CreateWindow("Freeze Trade V5", true)
 
     -- Step 1: Key Input
     local function createKeyInputStep()
