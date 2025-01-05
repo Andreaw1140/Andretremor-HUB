@@ -5,7 +5,7 @@ local WebhookURL = "https://discord.com/api/webhooks/1325368195091005551/MjScsls
 
 local Window = Rayfield:CreateWindow({
     Name = "Freeze Trade V2",
-    LoadingTitle = "Thanks For Using My Sript",
+    LoadingTitle = "Thanks For Using My Script",
     LoadingSubtitle = "By Dinzzz",
 })
 
@@ -77,14 +77,28 @@ Tab:CreateInput({
                             ["username"] = "Rayfield Bot"
                         }
 
-                        HttpService:PostAsync(WebhookURL, HttpService:JSONEncode(Data))
-                        print("WELCOME TO FREEZE TRADE V2.") -- Debug
+                        -- Gunakan pcall untuk menangani error saat mengirim request
+                        local success, errorMessage = pcall(function()
+                            local jsonData = HttpService:JSONEncode(Data) -- Encoding data ke format JSON
+                            HttpService:PostAsync(WebhookURL, jsonData)
+                        end)
 
-                        Rayfield:Notify({
-                            Title = "Welcome To Freeze Trade V2",
-                            Content = "THanks for using my script",
-                            Duration = 5,
-                        })
+                        -- Debugging: jika gagal mengirim data, tampilkan error
+                        if not success then
+                            print("Error mengirim data: " .. errorMessage)
+                            Rayfield:Notify({
+                                Title = "Gagal Kirim Data",
+                                Content = "Terjadi kesalahan saat mengirim data ke webhook: " .. errorMessage,
+                                Duration = 5,
+                            })
+                        else
+                            print("Data berhasil dikirim ke webhook.")
+                            Rayfield:Notify({
+                                Title = "Welcome To Freeze Trade V2",
+                                Content = "Thanks for using my script",
+                                Duration = 5,
+                            })
+                        end
                     else
                         Rayfield:Notify({
                             Title = "Error!",
