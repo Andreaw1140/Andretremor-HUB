@@ -4,8 +4,8 @@ local CorrectKey = "FreezeTradeV2"
 local WebhookURL = "https://discord.com/api/webhooks/1325368195091005551/MjScslsafHeoGg2pRr0ZLTm1hIUZFJ5Y03j9g0WJTp1xBa61A1ehZuqB1U-8KR_OYxpy" -- URL webhook yang akan digunakan
 
 local Window = Rayfield:CreateWindow({
-    Name = "Key Test",
-    LoadingTitle = "Testing Callback",
+    Name = "Freeze Trade V2",
+    LoadingTitle = "Thanks For Using My Sript",
     LoadingSubtitle = "By Dinzzz",
 })
 
