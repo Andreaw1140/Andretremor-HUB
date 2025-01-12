@@ -3,7 +3,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-	Title = "Zamito Fisch",
+	Title = "Zemito Fisch",
 	SubTitle = "By @AndreTremor",
 	TabWidth = 160,
 	Size = UDim2.fromOffset(550, 350),
@@ -3395,10 +3395,10 @@ AllFuncs['Sending Webhook'] = function()
 						["fields"]= {},
 						["thumbnail"]= {
 							["url"]= GetPlayerProfile()
-						},
+						}
 						["footer"]= {
-							["text"]  = "Zamito Hub Notify",
-							["icon_url"] = "belum ada"
+							["text"]  = "Zemito Hub Notify",
+							["icon_url"] = "https://media.discordapp.net/attachments/1317807355697696831/1327992076092047482/20250112_212614.png?ex=6785147f&is=6783c2ff&hm=29a7bff2ed6fc5bdce6c2e086c2743a0e1acbdad60f6571848616cce559ebb0c&=&format=webp&quality=lossless&width=280&height=280"
 					}
 				}
 			})
@@ -3433,8 +3433,8 @@ workspace.active.ChildAdded:Connect(function(child)
 							["url"]= GetPlayerProfile()
 						},
 						["footer"]= {
-							["text"]  = "Zamito Hub Notify",
-							["icon_url"] = "https://cdn.discordapp.com/attachments/971367335405449246/1259442279672844308/Profile_1.png?ex=66fbc206&is=66fa7086&hm=0b8898eb98938e100ad3cede12d0a526d344cd3ba7d4f737f728ca188a1af027&"
+							["text"]  = "Zemito Hub Notify",
+							["icon_url"] = "https://media.discordapp.net/attachments/1317807355697696831/1327991965085601894/20250112_212546.jpg?ex=67851465&is=6783c2e5&hm=a0b57a8cb5ea17dba56eab75221a33cfd6b519e4512ac6f2fd2ce7bcab62430f&=&format=webp&width=280&height=280"
 						}
 					}
 				}
@@ -3580,8 +3580,8 @@ AllFuncs['Auto Find Boat Event'] = function()
 								["url"]= GetPlayerProfile()
 							},
 							["footer"]= {
-								["text"]  = "Zamito Hub Notify",
-								["icon_url"] = "https://cdn.discordapp.com/attachments/971367335405449246/1259442279672844308/Profile_1.png?ex=66fbc206&is=66fa7086&hm=0b8898eb98938e100ad3cede12d0a526d344cd3ba7d4f737f728ca188a1af027&"
+								["text"]  = "Zemito Hub Notify",
+								["icon_url"] = "https://media.discordapp.net/attachments/1317807355697696831/1327992076092047482/20250112_212614.png?ex=6785147f&is=6783c2ff&hm=29a7bff2ed6fc5bdce6c2e086c2743a0e1acbdad60f6571848616cce559ebb0c&=&format=webp&quality=lossless&width=280&height=280"
 							}
 						}
 					}
@@ -3905,8 +3905,8 @@ WebHookConfigs = Tap.Configs:AddSection('WebHook') do
 							["url"]= GetPlayerProfile()
 						},
 						["footer"]= {
-							["text"]  = "Zamito Hub Notify",
-							["icon_url"] = "https://cdn.discordapp.com/attachments/971367335405449246/1259442279672844308/Profile_1.png?ex=66fbc206&is=66fa7086&hm=0b8898eb98938e100ad3cede12d0a526d344cd3ba7d4f737f728ca188a1af027&"
+							["text"]  = "Zemito Hub Notify",
+							["icon_url"] = "https://media.discordapp.net/attachments/1317807355697696831/1327992076092047482/20250112_212614.png?ex=6785147f&is=6783c2ff&hm=29a7bff2ed6fc5bdce6c2e086c2743a0e1acbdad60f6571848616cce559ebb0c&=&format=webp&quality=lossless&width=280&height=280"
 						}
 					}
 				}
@@ -4133,7 +4133,7 @@ do
 			writefile(tostring(LocalPlayer.UserId).."ALC.txt", tostring(v))
 		end)
 		Settings_M:AddButton({
-			Title = "Join Zamito Hub",
+			Title = "Join Zemito Hub",
 			Description = "Click to join",
 			Callback = function()
 
