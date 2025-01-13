@@ -3,8 +3,8 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-	Title = "Zemito Fisch",
-	SubTitle = "By @AndreTremor",
+	Title = "Zemito Hub FISCH",
+	SubTitle = "By @Andretremor",
 	TabWidth = 160,
 	Size = UDim2.fromOffset(550, 350),
 	Acrylic = false, 
@@ -3395,10 +3395,11 @@ AllFuncs['Sending Webhook'] = function()
 						["fields"]= {},
 						["thumbnail"]= {
 							["url"]= GetPlayerProfile()
-						}
+						},
 						["footer"]= {
-							["text"]  = "Zemito Hub Notify",
-							["icon_url"] = "https://media.discordapp.net/attachments/1317807355697696831/1327992076092047482/20250112_212614.png?ex=6785147f&is=6783c2ff&hm=29a7bff2ed6fc5bdce6c2e086c2743a0e1acbdad60f6571848616cce559ebb0c&=&format=webp&quality=lossless&width=280&height=280"
+							["text"]  = "Normal Hub Notify",
+							["icon_url"] = "https://cdn.discordapp.com/attachments/971367335405449246/1259442279672844308/Profile_1.png?ex=66fbc206&is=66fa7086&hm=0b8898eb98938e100ad3cede12d0a526d344cd3ba7d4f737f728ca188a1af027&"
+						}
 					}
 				}
 			})
@@ -3433,8 +3434,8 @@ workspace.active.ChildAdded:Connect(function(child)
 							["url"]= GetPlayerProfile()
 						},
 						["footer"]= {
-							["text"]  = "Zemito Hub Notify",
-							["icon_url"] = "https://media.discordapp.net/attachments/1317807355697696831/1327991965085601894/20250112_212546.jpg?ex=67851465&is=6783c2e5&hm=a0b57a8cb5ea17dba56eab75221a33cfd6b519e4512ac6f2fd2ce7bcab62430f&=&format=webp&width=280&height=280"
+							["text"]  = "Normal Hub Notify",
+							["icon_url"] = "https://cdn.discordapp.com/attachments/971367335405449246/1259442279672844308/Profile_1.png?ex=66fbc206&is=66fa7086&hm=0b8898eb98938e100ad3cede12d0a526d344cd3ba7d4f737f728ca188a1af027&"
 						}
 					}
 				}
@@ -3580,8 +3581,8 @@ AllFuncs['Auto Find Boat Event'] = function()
 								["url"]= GetPlayerProfile()
 							},
 							["footer"]= {
-								["text"]  = "Zemito Hub Notify",
-								["icon_url"] = "https://media.discordapp.net/attachments/1317807355697696831/1327992076092047482/20250112_212614.png?ex=6785147f&is=6783c2ff&hm=29a7bff2ed6fc5bdce6c2e086c2743a0e1acbdad60f6571848616cce559ebb0c&=&format=webp&quality=lossless&width=280&height=280"
+								["text"]  = "Normal Hub Notify",
+								["icon_url"] = "https://cdn.discordapp.com/attachments/971367335405449246/1259442279672844308/Profile_1.png?ex=66fbc206&is=66fa7086&hm=0b8898eb98938e100ad3cede12d0a526d344cd3ba7d4f737f728ca188a1af027&"
 							}
 						}
 					}
@@ -3905,8 +3906,8 @@ WebHookConfigs = Tap.Configs:AddSection('WebHook') do
 							["url"]= GetPlayerProfile()
 						},
 						["footer"]= {
-							["text"]  = "Zemito Hub Notify",
-							["icon_url"] = "https://media.discordapp.net/attachments/1317807355697696831/1327992076092047482/20250112_212614.png?ex=6785147f&is=6783c2ff&hm=29a7bff2ed6fc5bdce6c2e086c2743a0e1acbdad60f6571848616cce559ebb0c&=&format=webp&quality=lossless&width=280&height=280"
+							["text"]  = "Normal Hub Notify",
+							["icon_url"] = "https://cdn.discordapp.com/attachments/971367335405449246/1259442279672844308/Profile_1.png?ex=66fbc206&is=66fa7086&hm=0b8898eb98938e100ad3cede12d0a526d344cd3ba7d4f737f728ca188a1af027&"
 						}
 					}
 				}
@@ -3974,7 +3975,7 @@ end
 Teleporting = Tap.Teleport:AddSection('Teleport') do
 	-- Teleporting button for "Sunstone Island"
 Teleporting:AddButton({
-    Title = "Sunstone Island/Pulau Batu Matahari",
+    Title = "Sunstone Island",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-913.630615234375, 137.29348754882812, -1129.8995361328125)
     end
@@ -3982,7 +3983,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Roslit Bay"
 Teleporting:AddButton({
-    Title = "Roslit Bay/teluk Roslit",
+    Title = "Roslit Bay",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1501.675537109375, 133, 416.2070007324219)
     end
@@ -3990,7 +3991,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Random Islands"
 Teleporting:AddButton({
-    Title = "Random Island/Pulau Acak",
+    Title = "Random Islands",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(237.6944580078125, 139.34976196289062, 43.103424072265625)
     end
@@ -3998,7 +3999,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Moosewood"
 Teleporting:AddButton({
-    Title = "Moosewood/kayu rusa",
+    Title = "Moosewood",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(433.7972106933594, 147.07003784179688, 261.80218505859375)
     end
@@ -4006,7 +4007,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Executive Headquarters"
 Teleporting:AddButton({
-    Title = "Executive Headquarters/Tempat Atmin Nongkrong",
+    Title = "Executive Headquarters",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-36.46199035644531, -246.55001831054688, 205.77120971679688)
     end
@@ -4014,7 +4015,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Enchant Room"
 Teleporting:AddButton({
-    Title = "Enchant Room/Tempat Persembahan Rod",
+    Title = "Enchant Room",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1310.048095703125, -805.292236328125, -162.34507751464844)
     end
@@ -4022,7 +4023,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Statue Of Sovereignty"
 Teleporting:AddButton({
-    Title = "Statue of Sovereignty/Patung Kedaulatan",
+    Title = "Statue Of Sovereignty",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(22.098665237426758, 159.01470947265625, -1039.8543701171875)
     end
@@ -4030,7 +4031,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Mushgrove Swamp"
 Teleporting:AddButton({
-    Title = "Mushgrove Swamp/Rawa Mushgrove",
+    Title = "Mushgrove Swamp",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2442.805908203125, 130.904052734375, -686.1648559570312)
     end
@@ -4038,7 +4039,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Snowcap Island"
 Teleporting:AddButton({
-    Title = "Snowcap Island/Pulau Topi Salju",
+    Title = "Snowcap Island",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2589.534912109375, 134.9249267578125, 2333.099365234375)
     end
@@ -4046,7 +4047,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Terrapin Island"
 Teleporting:AddButton({
-    Title = "Terrapin Island/Pulau Terrapin",
+    Title = "Terrapin Island",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(152.3716278076172, 154.91015625, 2000.9171142578125)
     end
@@ -4062,7 +4063,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Terrapin Island"
 Teleporting:AddButton({
-    Title = "Best Spot/Spot Gacor",
+    Title = "Best Spot",
     Callback = function()
     local forceFieldPart = Instance.new("Part") -- Create a new part
 forceFieldPart.Size = Vector3.new(10, 1, 10) -- Set the size of the part (10x1x10)
@@ -4133,7 +4134,7 @@ do
 			writefile(tostring(LocalPlayer.UserId).."ALC.txt", tostring(v))
 		end)
 		Settings_M:AddButton({
-			Title = "Join Zemito Hub",
+			Title = "Join Normal Hub Discord",
 			Description = "Click to join",
 			Callback = function()
 
