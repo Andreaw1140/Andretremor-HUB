@@ -8,7 +8,7 @@ local Window = Fluent:CreateWindow({
 	TabWidth = 160,
 	Size = UDim2.fromOffset(550, 350),
 	Acrylic = false, 
-	Theme = "Amethyst",
+	Theme = "Aqua",
 	MinimizeKey = Enum.KeyCode.LeftControl
 })
 
@@ -56,7 +56,7 @@ end
 
 function Notify(Des, Time, title)
 	Fluent:Notify({
-		Title= title or "Normal Hub Notify",
+		Title= title or "Zemito Hub Notify",
 		Content = Des,
 		Duration = Time or 3
 	})
@@ -3052,7 +3052,7 @@ local Tap = {
 	General = Window:AddTab({Title = "Generals", Icon = "box"}),
 	Event = Window:AddTab({Title = "Event", Icon = "star"}),
 	Player = Window:AddTab({ Title = "Player", Icon = "user"}),
-	Shop = Window:AddTab({ Title = "Shopee", Icon = "shopping-bag"}),
+	Shop = Window:AddTab({ Title = "Shop/Toko", Icon = "shopping-bag"}),
 	Configs = Window:AddTab({Title = "Configs", Icon = "diamond"}),
 	Teleport = Window:AddTab({Title = "Teleport", Icon = "asterisk"}),
 	Settings = Window:AddTab({Title = "Settings", Icon = "settings"})
@@ -3763,7 +3763,7 @@ MiscPlayer = Tap.Player:AddSection('Misc Player') do
 			PlayerGui.hud.safezone.backpack.inventory.Sell.sellall.Disabled = false
 		end
 	end)
-	Toggle(MiscPlayer, "Infinite Oxygen", "", "Infinite Oxygen", function(Value)
+	Toggle(MiscPlayer, "Infinite Oxygen", "", "Infinite Oxygen/Not Support di antartika", function(Value)
 		LocalPlayer.Character.client.oxygen.Disabled = Value
 	end)
 	Toggle(MiscPlayer, "Weather Clear", "", "Weather Clear", function(Value)
@@ -3906,8 +3906,8 @@ WebHookConfigs = Tap.Configs:AddSection('WebHook') do
 							["url"]= GetPlayerProfile()
 						},
 						["footer"]= {
-							["text"]  = "Normal Hub Notify",
-							["icon_url"] = "https://cdn.discordapp.com/attachments/971367335405449246/1259442279672844308/Profile_1.png?ex=66fbc206&is=66fa7086&hm=0b8898eb98938e100ad3cede12d0a526d344cd3ba7d4f737f728ca188a1af027&"
+							["text"]  = "Zemito Hub Is Back",
+							["icon_url"] = "https://cdn.discordapp.com/attachments/1317807355697696831/1327992076092047482/20250112_212614.png?ex=678b033f&is=6789b1bf&hm=a60f428b96b473069c8b507273d8247586d54e058b86c952b001889c7d49f704&"
 						}
 					}
 				}
@@ -4007,7 +4007,7 @@ Teleporting:AddButton({
 
 -- Teleporting button for "Executive Headquarters"
 Teleporting:AddButton({
-    Title = "Executive Headquarters",
+    Title = "Executive Headquarters/Tempat Rahasia cik",
     Callback = function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-36.46199035644531, -246.55001831054688, 205.77120971679688)
     end
@@ -4108,7 +4108,7 @@ end
 
 local Old = os.time()
 	task.spawn(function(InitializeService)
-		warn("ANTI AFK STARTING")
+		warn("Anti AFK ON")
 		pcall(function()
 			for i,v in pairs(getconnections(Client.Idled)) do
 				v:Disable() 
@@ -4134,7 +4134,7 @@ do
 			writefile(tostring(LocalPlayer.UserId).."ALC.txt", tostring(v))
 		end)
 		Settings_M:AddButton({
-			Title = "Join Normal Hub Discord",
+			Title = "Join Zemito Hub Discord",
 			Description = "Click to join",
 			Callback = function()
 
