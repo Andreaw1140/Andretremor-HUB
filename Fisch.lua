@@ -113,7 +113,7 @@ ImageButton.Position = UDim2.new(0.218742043, 0, -0.155235752, 0)
 ImageButton.Size = UDim2.new(0, 64, 0, 64)
 
 -- Set initial image to "open"
-ImageButton.Image = "rbxassetid://136634905225382" -- Open image asset ID
+ImageButton.Image = "rbxassetid://11176073582" -- Open image asset ID
 local isOpen = true -- Variable to track the state
 
 ImageButton.MouseButton1Click:Connect(function()
@@ -125,9 +125,9 @@ ImageButton.MouseButton1Click:Connect(function()
 
     -- Toggle the image based on the state
     if isOpen then
-        ImageButton.Image = "rbxassetid://134717468347051" -- Replace with close image asset ID
+        ImageButton.Image = "rbxassetid://11176073582" -- Replace with close image asset ID
     else
-        ImageButton.Image = "rbxassetid://136634905225382" -- Open image asset ID
+        ImageButton.Image = "rbxassetid://11176073582" -- Open image asset ID
     end
     isOpen = not isOpen -- Toggle the state
 
