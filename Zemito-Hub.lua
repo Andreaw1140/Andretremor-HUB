@@ -42,7 +42,7 @@ local MainTab = Window:MakeTab({
 
 -- Toggles
 MainTab:AddToggle({
-    Name = "Bypass ON/OFF",
+    Name = "Anti AFK ON/OFF",
     Default = false,
     Callback = function(value)
         bypassStatus = value
@@ -188,7 +188,7 @@ GantengTab:AddButton({
 
 -- Tab: HutaoTab (Corrected)
 local HutaoTab = Window:MakeTab({
-    Name = "Hutao (keyless)",
+    Name = "Hutao Hub",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
@@ -278,6 +278,50 @@ ServerTab:AddTextbox({
         if jobID ~= "" then
             game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer("teleport", jobID)
         end
+    end
+})
+
+-- Memutar Lagu "Relaxed Scene" dengan Loop
+MainTab:AddButton({
+    Name = "Play Relax",
+    Callback = function()
+        local SoundService = game:GetService("SoundService") -- Akses
+        local song = Instance.new("Sound") -- Buat Objek
+        song.SoundId = "rbxassetid://1848354536" -- audio id
+        song.Volume = 0.5 -- volume
+        song.Looped = true -- Lagu akan diputar terus-menerus
+        song.Parent = SoundService -- Masukin sound
+        song:Play() -- mulai putar lagu
+
+        -- Notifikasi
+        ZamitoHub:MakeNotification({
+            Name = "Song Playing",
+            Content = "Santai Dulu Kawan",
+            Image = "rbxassetid://4483345998",
+            Time = 5
+        })
+    end
+})
+
+-- Tombol untuk Menghentikan Lagu
+MainTab:AddButton({
+    Name = "Stop Relax Sound",
+    Callback = function()
+        local SoundService = game:GetService("SoundService")
+        for _, sound in ipairs(SoundService:GetChildren()) do
+            if sound:IsA("Sound") then
+                sound:Stop() -- Hentikan semua lagu yang sedang diputar
+                sound:Destroy() -- Hapus objek Sound
+            end
+        end
+
+        -- Notifikasi
+        ZamitoHub:MakeNotification({
+            Name = "Song Stopped",
+            Content = "Relax Sound dihentikan!",
+            Image = "rbxassetid://4483345998",
+            Time = 5
+        })
     end
 })
 
