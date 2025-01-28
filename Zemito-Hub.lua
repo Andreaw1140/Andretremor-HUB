@@ -187,6 +187,12 @@ HutaoTab:AddButton({
     end
 })
 
+-- Tab: BANANA
+local HutaoTab = Window:MakeTab({
+    Name = "Hutao Hub",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
 HutaoTab:AddButton({
     Name = "Get Key",
     Callback = function()
