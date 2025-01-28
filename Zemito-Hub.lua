@@ -70,13 +70,6 @@ MainTab:AddToggle({
 
 -- Buttons
 MainTab:AddButton({
-    Name = "Zen (Keyless)",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Zenhubtop/zen_hub_pr/main/zennewwwwui.lua", true))()
-    end
-})
-
-MainTab:AddButton({
     Name = "Speed Hub",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()
@@ -99,7 +92,6 @@ MainTab:AddButton({
         loadstring(game:HttpGet("https://raw.githubusercontent.com/UserDevEthical/Loadstring/main/CokkaHub.lua"))()
     end
 })
-
 
 MainTab:AddButton({
     Name = "RedzHub (Not Support Luna)",
@@ -163,34 +155,6 @@ BananaTab:AddButton({
             })
         end
     end
-})
-
--- Tab: GantengTab
-local GantengTab = Window:MakeTab({
-    Name = "Ganteng Hub",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
-})
-
-GantengTab:AddButton({
-    Name = "GantengHUB (REMAKE V1)",
-    Callback = function()
-        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/516a5669fc39b4945cd0609a08264505.lua"))()
-    end
-})
-
-GantengTab:AddButton({
-    Name = "GantengHUB(SEPUH/OLD)",
-    Callback = function()
-        loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/a5c3af437cd698d64379cf75cacb9281.lua"))()
-    end
-})
-
--- Tab: HutaoTab (Corrected)
-local HutaoTab = Window:MakeTab({
-    Name = "Hutao Hub",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
 })
 
 -- Add Textbox for Key Input
@@ -282,7 +246,7 @@ ServerTab:AddTextbox({
 })
 
 
--- Tab: GantengTab
+-- Tab: Sound
 local SoundTab = Window:MakeTab({
     Name = "Music",
     Icon = "rbxassetid://4483345998",
