@@ -281,22 +281,18 @@ SoundTab:AddButton({
     end
 })
 
--- Tombol untuk Menghentikan Lagu
 SoundTab:AddButton({
     Name = "Stop Relax Sound",
     Callback = function()
         local SoundService = game:GetService("SoundService")
-        for _, sound in ipairs(SoundService:GetChildren()) do
+        for _, sound in pairs(SoundService:GetChildren()) do
             if sound:IsA("Sound") then
-                sound:Stop() -- Hentikan semua lagu yang sedang diputar
-                sound:Destroy() -- Hapus objek Sound
+                sound:Stop()
             end
         end
-
-        -- Notifikasi
         ZamitoHub:MakeNotification({
-            Name = "Song Stopped",
-            Content = "Relax Sound dihentikan!",
+            Name = "Music Stopped",
+            Content = "Relaxing music has been stopped.",
             Image = "rbxassetid://4483345998",
             Time = 5
         })
@@ -304,24 +300,15 @@ SoundTab:AddButton({
 })
 
 -- Apply Theme Frost
-ZamitoHub.Themes.Frost.Main = Color3.fromRGB(50, 50, 50)  -- Abu-abu gelap
-ZamitoHub.Themes.Frost.Second = Color3.fromRGB(139, 0, 0)  -- Merah gelap (lebih misterius)
-ZamitoHub.Themes.Frost.Stroke = Color3.fromRGB(205, 92, 92)  -- Merah lembut (soft red)
-ZamitoHub.Themes.Frost.Divider = Color3.fromRGB(70, 70, 70)  -- Divider gelap
-ZamitoHub.Themes.Frost.Text = Color3.fromRGB(240, 240, 240)  -- Teks putih agak terang
-ZamitoHub.Themes.Frost.TextDark = Color3.fromRGB(255, 69, 0)  -- Teks gelap dengan aksen merah terang
+ZamitoHub.Themes.Frost.Main = Color3.fromRGB(50, 50, 50)  -- Dark Grey
+ZamitoHub.Themes.Frost.Second = Color3.fromRGB(139, 0, 0)  -- Dark Red
+ZamitoHub.Themes.Frost.Stroke = Color3.fromRGB(205, 92, 92)  -- Soft Red
+ZamitoHub.Themes.Frost.Divider = Color3.fromRGB(70, 70, 70)  -- Dark Divider
+ZamitoHub.Themes.Frost.Text = Color3.fromRGB(240, 240, 240)  -- Light Text
+ZamitoHub.Themes.Frost.TextDark = Color3.fromRGB(255, 69, 0)  -- Bright Red Text
 
--- Terapkan tema yang sudah diubah
+-- Apply the theme
 ZamitoHub:ApplyTheme(ZamitoHub.Themes.Frost)
 
 -- Initialize UI
 ZamitoHub:Init()
-
--- Override Welcome Message
-local notificationFrame = game:GetService("CoreGui"):FindFirstChild("Zamito Hub")
-if notificationFrame then
-    local welcomeMessage = notificationFrame:FindFirstChild("Notifications"):FindFirstChild("Welcome")
-    if welcomeMessage then
-        welcomeMessage.Message.Text = "ZAMITO HUB (BETA)"
-    end
-end
