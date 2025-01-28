@@ -281,8 +281,16 @@ ServerTab:AddTextbox({
     end
 })
 
+
+-- Tab: GantengTab
+local SoundTab = Window:MakeTab({
+    Name = "Music",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
 -- Memutar Lagu "Relaxed Scene" dengan Loop
-MainTab:AddButton({
+SoundTab:AddButton({
     Name = "Play Relax",
     Callback = function()
         local SoundService = game:GetService("SoundService") -- Akses
@@ -304,7 +312,7 @@ MainTab:AddButton({
 })
 
 -- Tombol untuk Menghentikan Lagu
-MainTab:AddButton({
+SoundTab:AddButton({
     Name = "Stop Relax Sound",
     Callback = function()
         local SoundService = game:GetService("SoundService")
