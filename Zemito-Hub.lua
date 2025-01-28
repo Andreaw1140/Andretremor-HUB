@@ -26,13 +26,6 @@ StatusTab:AddLabel("DEV: DC(@andretremor)")
 StatusTab:AddLabel("INFO: For Bug @Andretremor(discord)")
 StatusTab:AddLabel("INFO: Kalo Ada Bug @vozxc")
 
--- Update Ping and Bypass Status
-task.spawn(function()
-    while true do
-        task.wait(1) -- Interval pembaruan setiap 1 detik
-    end
-end)
-
 -- Tab: Main
 local MainTab = Window:MakeTab({
     Name = "Main",
@@ -80,23 +73,38 @@ MainTab:AddButton({
     Name = "W-Azure",
     Callback = function()
         getgenv().Team = "Pirates"
-        getgenv().FixCrash = false -- Turn it On For Hopping Server, Improve Performance But Silent Aim On Mob And Player
-        getgenv().FixCrash2 = false -- Turn it On For Hopping Server, Improve Performance But Will Remove Speed Changer
+        getgenv().FixCrash = false -- Turn it On For Hopping Server
+        getgenv().FixCrash2 = false -- Turn it On For Hopping Server
         loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3b2169cf53bc6104dabe8e19562e5cc2.lua"))()
     end
 })
-MainTab:AddButton({
-    Name = "COKKA HUB",
-    Callback = function()
-        _G.Key = "Xzt7M9IAfF"
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/UserDevEthical/Loadstring/main/CokkaHub.lua"))()
+
+-- Key Input and Buttons
+local keyInput = ""
+MainTab:AddTextbox({
+    Name = "Input Key",
+    Default = "",
+    TextDisappear = true,
+    Callback = function(value)
+        keyInput = value
+        writefile("ZamitoHubKey.txt", keyInput)  -- Menyimpan key input ke file jika dibutuhkan
     end
 })
 
 MainTab:AddButton({
-    Name = "RedzHub (Not Support Luna)",
+    Name = "Start",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/realredz/BloxFruits/refs/heads/main/Source.lua"))()
+        if keyInput ~= "" then
+            getgenv().Key = keyInput
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/obiiyeuem/vthangsitink/main/BananaHub.lua"))()
+        else
+            ZamitoHub:MakeNotification({
+                Name = "Error",
+                Content = "Please input a key before starting!",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+        end
     end
 })
 
@@ -129,7 +137,6 @@ BananaTab:AddButton({
     end
 })
 
-local keyInput = ""
 BananaTab:AddTextbox({
     Name = "Input Key",
     Default = "",
@@ -157,47 +164,18 @@ BananaTab:AddButton({
     end
 })
 
--- Add Textbox for Key Input
-HutaoTab:AddTextbox({
-    Name = "Input Key",
-    Default = "",
-    TextDisappear = true,
-    Callback = function(value)
-        keyInput = value
-        writefile("ZamitoHubKey.txt", keyInput)  -- Menyimpan key input ke file jika dibutuhkan
-    end
-})
-
--- Button untuk Menjalankan Skrip menggunakan Key
-HutaoTab:AddButton({
-    Name = "Start",
-    Callback = function()
-        if keyInput ~= "" then
-            -- Menjalankan skrip berdasarkan key yang dimasukkan
-            getgenv().Key = keyInput
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/HutaoHubs/Hutaohubs2.0/refs/heads/main/Bloxfruit3.lua"))()  -- Ganti dengan URL yang sesuai
-        else
-            ZamitoHub:MakeNotification({
-                Name = "Error",
-                Content = "Please input a key before starting!",
-                Image = "rbxassetid://4483345998",
-                Time = 5
-            })
-        end
-    end
-})
-
--- Tab: BANANA
+-- Tab: Hutao Hub
 local HutaoTab = Window:MakeTab({
     Name = "Hutao Hub",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
+
 HutaoTab:AddButton({
     Name = "Get Key",
     Callback = function()
         if setclipboard then
-            setclipboard("https://linkvertise.com/1232655/key-fisch-hutao-hub?o=sharing")  -- Link untuk key
+            setclipboard("https://linkvertise.com/1232655/key-fisch-hutao-hub?o=sharing") 
             ZamitoHub:MakeNotification({
                 Name = "Key Copied",
                 Content = "Key URL has been copied to clipboard!",
@@ -215,14 +193,40 @@ HutaoTab:AddButton({
     end
 })
 
--- Tab: Main
+HutaoTab:AddTextbox({
+    Name = "Input Key",
+    Default = "",
+    TextDisappear = true,
+    Callback = function(value)
+        keyInput = value
+        writefile("ZamitoHubKey.txt", keyInput)
+    end
+})
+
+HutaoTab:AddButton({
+    Name = "Start",
+    Callback = function()
+        if keyInput ~= "" then
+            getgenv().Key = keyInput
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/HutaoHubs/Hutaohubs2.0/refs/heads/main/Bloxfruit3.lua"))()
+        else
+            ZamitoHub:MakeNotification({
+                Name = "Error",
+                Content = "Please input a key before starting!",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+        end
+    end
+})
+
+-- Tab: Alchemy
 local AlchemyTab = Window:MakeTab({
     Name = "Alchemy",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
 
--- Buttons
 AlchemyTab:AddButton({
     Name = "Alchemy(Keyless)",
     Callback = function()
@@ -237,20 +241,18 @@ local ServerTab = Window:MakeTab({
     PremiumOnly = false
 })
 
--- Job ID
 local jobID = ""
 ServerTab:AddTextbox({
     Name = "Input Job ID",
     Default = "",
     TextDisappear = true,
     Callback = function(value)
-        jobID = value:gsub("", "")
+        jobID = value
         if jobID ~= "" then
             game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer("teleport", jobID)
         end
     end
 })
-
 
 -- Tab: Sound
 local SoundTab = Window:MakeTab({
@@ -259,19 +261,17 @@ local SoundTab = Window:MakeTab({
     PremiumOnly = false
 })
 
--- Memutar Lagu "Relaxed Scene" dengan Loop
 SoundTab:AddButton({
     Name = "Play Relax",
     Callback = function()
-        local SoundService = game:GetService("SoundService") -- Akses
-        local song = Instance.new("Sound") -- Buat Objek
-        song.SoundId = "rbxassetid://1848354536" -- audio id
-        song.Volume = 0.5 -- volume
-        song.Looped = true -- Lagu akan diputar terus-menerus
-        song.Parent = SoundService -- Masukin sound
-        song:Play() -- mulai putar lagu
+        local SoundService = game:GetService("SoundService")
+        local song = Instance.new("Sound")
+        song.SoundId = "rbxassetid://1848354536"
+        song.Volume = 0.5
+        song.Looped = true
+        song.Parent = SoundService
+        song:Play()
 
-        -- Notifikasi
         ZamitoHub:MakeNotification({
             Name = "Song Playing",
             Content = "Santai Dulu Kawan",
