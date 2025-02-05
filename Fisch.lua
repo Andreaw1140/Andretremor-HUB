@@ -4,11 +4,11 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 
 local Window = Fluent:CreateWindow({
 	Title = "Zemito Hub FISCH",
-	SubTitle = "By @Andretremor",
+	SubTitle = "By @Andrea.W",
 	TabWidth = 160,
 	Size = UDim2.fromOffset(550, 350),
 	Acrylic = false, 
-	Theme = "Aqua",
+	Theme = "Amethyst",
 	MinimizeKey = Enum.KeyCode.LeftControl
 })
 
@@ -3180,7 +3180,7 @@ AllFuncs['Farm Fish'] = function()
 			local XyzClone = game:GetService("ReplicatedStorage").resources.items.items.GPS.GPS.gpsMain.xyz:Clone()
 			XyzClone.Parent = game.Players.LocalPlayer.PlayerGui:WaitForChild("hud"):WaitForChild("safezone"):WaitForChild("backpack")
 			XyzClone.Name = "Lure"
-			XyzClone.Text = "<font color='#ff4949'>Lure </font>: 0%"
+			XyzClone.Text = "<font color='#ff4949'> Ig;andretremor Lure </font>: 0%"
 			repeat
 				pcall(function()
 					PlayerGui:FindFirstChild("shakeui").safezone:FindFirstChild("button").Size = UDim2.new(1001, 0, 1001, 0)
@@ -3829,12 +3829,12 @@ MiscPlayer = Tap.Player:AddSection('Misc Player') do
 	})
 end
 
-Shoppy = Tap.Shop:AddSection('Shop All') do
-	Toggle(Shoppy, "Teleport To Buy", "", "Teleport To Buy")
+Shop = Tap.Shop:AddSection('Shop All') do
+	Toggle(Shop, "Teleport To Buy", "", "Teleport To Buy")
 	for i,v in pairs(workspace.world.interactables:GetDescendants()) do
 		if v.Name == "purchaserompt" or v.ClassName == "ProximityPrompt" then
 			v.HoldDuration = 0
-			Shoppy:AddButton({
+			Shop:AddButton({
 				Title = "Buy "..v.Parent.Name,
 				Description = v.ActionText,
 				Callback = function()
@@ -3856,7 +3856,7 @@ Shoppy = Tap.Shop:AddSection('Shop All') do
 		end
 	end
 end
-Shoppy:AddButton({
+Shop:AddButton({
     Title = "Buy Enchant Relic",
     Description = "View [11,000C$]",
     Callback = function()
