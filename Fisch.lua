@@ -3581,7 +3581,7 @@ AllFuncs['Auto Find Boat Event'] = function()
 								["url"]= GetPlayerProfile()
 							},
 							["footer"]= {
-								["text"]  = "Normal Hub Notify",
+								["text"] = Zemito Notify",
 								["icon_url"] = "https://cdn.discordapp.com/attachments/971367335405449246/1259442279672844308/Profile_1.png?ex=66fbc206&is=66fa7086&hm=0b8898eb98938e100ad3cede12d0a526d344cd3ba7d4f737f728ca188a1af027&"
 							}
 						}
